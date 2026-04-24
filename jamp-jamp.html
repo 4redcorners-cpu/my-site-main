@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Попрыгунчик — Портфолио</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Unbounded:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .game-page {
+      padding: 28px 0 42px;
+    }
+    .game-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .game-title {
+      margin: 0;
+      font-size: clamp(1.35rem, 2.8vw, 2rem);
+    }
+    .back-link {
+      background: rgba(var(--primary-rgb), 0.12);
+      color: var(--primary);
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      font-weight: 600;
+    }
+    .game-head-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .fullscreen-btn {
+      background: var(--primary);
+      color: #fff;
+      border: 1px solid var(--primary);
+      border-radius: 10px;
+      padding: 8px 12px;
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .fullscreen-btn:hover {
+      background: var(--primary-dark);
+    }
+    .fullscreen-wrap {
+      width: 100%;
+      height: min(78vh, 900px);
+      min-height: 560px;
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+    .exit-fullscreen-overlay {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 5;
+      background: rgba(15, 23, 39, 0.72);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 10px;
+      padding: 8px 12px;
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+      display: none;
+    }
+    .fullscreen-wrap:fullscreen .exit-fullscreen-overlay {
+      display: inline-flex;
+    }
+    @media (max-width: 760px) {
+      .fullscreen-wrap {
+        min-height: 72vh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" id="top">
+    <div class="container nav-wrap">
+      <a class="brand" href="index.html">Евгений Ворошилов</a>
+      <nav class="site-nav" id="site-nav" aria-label="Основная навигация">
+        <a href="index.html">Обо мне</a>
+        <a href="services.html">Услуги</a>
+        <a href="works.html">Портфолио</a>
+        <a href="cost.html">Стоимость</a>
+        <a href="contacts.html">Контакты</a>
+      </nav>
+      <div class="header-actions">
+        <button class="settings-toggle" type="button" aria-expanded="false" aria-controls="settings-panel" aria-label="Настройки темы и цвета">⚙</button>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Меню</button>
+      </div>
+    </div>
+    <aside class="settings-panel" id="settings-panel" aria-label="Настройки сайта" hidden>
+      <p class="settings-title">Настройки</p>
+      <div class="settings-group">
+        <p class="settings-label">Тема</p>
+        <div class="settings-options">
+          <button class="option-btn" type="button" data-theme-option="light">Светлая</button>
+          <button class="option-btn" type="button" data-theme-option="dark">Тёмная</button>
+        </div>
+      </div>
+      <div class="settings-group">
+        <p class="settings-label">Основной цвет</p>
+        <div class="settings-options settings-colors">
+          <button class="color-btn" type="button" data-accent-option="orange" aria-label="Оранжевый"></button>
+          <button class="color-btn" type="button" data-accent-option="blue" aria-label="Синий"></button>
+          <button class="color-btn" type="button" data-accent-option="purple" aria-label="Фиолетовый"></button>
+          <button class="color-btn" type="button" data-accent-option="neon" aria-label="Неоновый"></button>
+          <button class="color-btn" type="button" data-accent-option="dark-yellow" aria-label="Тёмно-жёлтый"></button>
+        </div>
+      </div>
+    </aside>
+  </header>
+
+  <main class="game-page">
+    <div class="container">
+      <div class="game-head">
+        <h1 class="game-title">Попрыгунчик</h1>
+        <div class="game-head-actions">
+          <button class="fullscreen-btn" type="button" id="fullscreenToggle">На весь экран</button>
+          <a class="back-link" href="works.html">← Назад в портфолио</a>
+        </div>
+      </div>
+      <div class="fullscreen-wrap" id="gameContainer">
+        <button class="exit-fullscreen-overlay" type="button" id="fullscreenExit">Выйти из полноэкранного режима</button>
+        <iframe id="gameFrame" src="games/jamp-jamp/index.html" title="Игра Попрыгунчик" tabindex="0"></iframe>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <a class="brand" href="index.html">Евгений Ворошилов</a>
+        <p class="footer-note">Сайты, digital-упаковка и AI-решения для экспертов и малого бизнеса.</p>
+      </div>
+      <div class="footer-copy">© <span id="year"></span> Евгений Ворошилов. Все права защищены.</div>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+  <script>
+    const fullscreenToggle = document.getElementById("fullscreenToggle");
+    const fullscreenExit = document.getElementById("fullscreenExit");
+    const gameContainer = document.getElementById("gameContainer");
+    const gameFrame = document.getElementById("gameFrame");
+
+    function focusGameFrame() {
+      gameFrame.focus();
+      if (gameFrame.contentWindow) {
+        gameFrame.contentWindow.focus();
+      }
+    }
+
+    function updateFullscreenLabel() {
+      const isFullscreen = document.fullscreenElement === gameContainer;
+      fullscreenToggle.textContent = isFullscreen ? "Выйти из полноэкраного режима" : "На весь экран";
+      if (isFullscreen) {
+        setTimeout(focusGameFrame, 50);
+      }
+    }
+
+    fullscreenToggle.addEventListener("click", async () => {
+      try {
+        if (document.fullscreenElement === gameContainer) {
+          await document.exitFullscreen();
+        } else {
+          await gameContainer.requestFullscreen();
+          setTimeout(focusGameFrame, 50);
+        }
+      } catch (_error) {
+        // Ignore: fullscreen may be blocked by browser settings.
+      } finally {
+        updateFullscreenLabel();
+      }
+    });
+
+    fullscreenExit.addEventListener("click", async () => {
+      if (document.fullscreenElement === gameContainer) {
+        await document.exitFullscreen();
+      }
+    });
+
+    gameFrame.addEventListener("load", () => {
+      focusGameFrame();
+    });
+
+    document.addEventListener("fullscreenchange", updateFullscreenLabel);
+    updateFullscreenLabel();
+  </script>
+</body>
+</html>

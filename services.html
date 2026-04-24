@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Услуги</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Unbounded:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header" id="top">
+    <div class="container nav-wrap">
+      <a class="brand" href="index.html">Евгений Ворошилов</a>
+      <nav class="site-nav" id="site-nav" aria-label="Основная навигация">
+        <a href="index.html">Обо мне</a>
+        <a href="services.html">Услуги</a>
+        <a href="works.html">Портфолио</a>
+        <a href="cost.html">Стоимость</a>
+        <a href="contacts.html">Контакты</a>
+      </nav>
+      <div class="header-actions">
+        <button class="settings-toggle" type="button" aria-expanded="false" aria-controls="settings-panel" aria-label="Настройки темы и цвета">⚙</button>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Меню</button>
+      </div>
+    </div>
+    <aside class="settings-panel" id="settings-panel" aria-label="Настройки сайта" hidden>
+      <p class="settings-title">Настройки</p>
+      <div class="settings-group">
+        <p class="settings-label">Тема</p>
+        <div class="settings-options">
+          <button class="option-btn" type="button" data-theme-option="light">Светлая</button>
+          <button class="option-btn" type="button" data-theme-option="dark">Тёмная</button>
+        </div>
+      </div>
+      <div class="settings-group">
+        <p class="settings-label">Основной цвет</p>
+        <div class="settings-options settings-colors">
+          <button class="color-btn" type="button" data-accent-option="orange" aria-label="Оранжевый"></button>
+          <button class="color-btn" type="button" data-accent-option="blue" aria-label="Синий"></button>
+          <button class="color-btn" type="button" data-accent-option="purple" aria-label="Фиолетовый"></button>
+          <button class="color-btn" type="button" data-accent-option="neon" aria-label="Неоновый"></button>
+          <button class="color-btn" type="button" data-accent-option="dark-yellow" aria-label="Тёмно-жёлтый"></button>
+        </div>
+      </div>
+    </aside>
+  </header>
+
+  <main class="section services-page">
+    <div class="container">
+      <h1>Услуги</h1>
+      <p class="section-intro">
+        Услуги можно брать отдельно или объединять в один digital-продукт: сайт, интернет-магазин, Android-приложение, прототип, ИИ-агент или визуальную систему проекта.
+      </p>
+      <div class="grid cards-7">
+        <article class="service-card">
+          <h3>Сайты и лендинги</h3>
+          <p>Создаю страницы для экспертов, услуг, личных брендов, ремесленных проектов и малого бизнеса. Сайт помогает объяснить ценность, вызвать доверие и привести человека к заявке.</p>
+          <p><strong>Что входит:</strong></p>
+          <ul class="service-list">
+            <li>разбор задачи, аудитории и предложения;</li>
+            <li>структура страницы и порядок блоков;</li>
+            <li>первый экран и ключевые смыслы;</li>
+            <li>тексты для основных блоков;</li>
+            <li>web-дизайн и визуальная подача;</li>
+            <li>адаптация под мобильные устройства;</li>
+            <li>сборка страницы;</li>
+            <li>финальная проверка перед запуском.</li>
+          </ul>
+        </article>
+
+        <article class="service-card">
+          <h3>Интернет-магазины</h3>
+          <p>Собираю интернет-магазины для продажи товаров и услуг. Продумываю структуру, визуальную подачу, карточки товаров и путь клиента к покупке.</p>
+          <p><strong>Что входит:</strong></p>
+          <ul class="service-list">
+            <li>структура магазина;</li>
+            <li>главная страница;</li>
+            <li>категории товаров;</li>
+            <li>карточки товаров;</li>
+            <li>блоки доверия и преимуществ;</li>
+            <li>путь клиента до покупки;</li>
+            <li>визуальная подача каталога;</li>
+            <li>адаптация под мобильные устройства.</li>
+          </ul>
+        </article>
+
+        <article class="service-card">
+          <h3>Android-приложения</h3>
+          <p>Создаю простые Android-приложения под задачу проекта: MVP, личный сервис, инструмент для клиента, внутренняя система или рабочий процесс.</p>
+          <p><strong>Что входит:</strong></p>
+          <ul class="service-list">
+            <li>разбор задачи приложения;</li>
+            <li>логика работы;</li>
+            <li>структура экранов;</li>
+            <li>пользовательский сценарий;</li>
+            <li>интерфейс;</li>
+            <li>базовый функционал;</li>
+            <li>сборка MVP;</li>
+            <li>подготовка к тестированию.</li>
+          </ul>
+        </article>
+
+        <article class="service-card">
+          <h3>Прототипы и MVP</h3>
+          <p>Собираю идею в понятный прототип, чтобы проверить гипотезу, показать продукт, подготовить презентацию или основу для дальнейшей разработки.</p>
+          <p><strong>Что входит:</strong></p>
+          <ul class="service-list">
+            <li>разбор идеи;</li>
+            <li>определение ключевой функции;</li>
+            <li>структура продукта;</li>
+            <li>основные экраны или блоки;</li>
+            <li>сценарий пользователя;</li>
+            <li>визуальная основа;</li>
+            <li>сборка прототипа;</li>
+            <li>подготовка к показу или тесту.</li>
+          </ul>
+        </article>
+
+        <article class="service-card">
+          <h3>Web-дизайн</h3>
+          <p>Проектирую внешний вид сайта, страницы или интерфейса. Работаю с композицией, иерархией, акцентами и удобством восприятия.</p>
+          <p><strong>Что входит:</strong></p>
+          <ul class="service-list">
+            <li>визуальная концепция;</li>
+            <li>дизайн блоков и экранов;</li>
+            <li>сетка и композиция;</li>
+            <li>типографика;</li>
+            <li>цветовая логика;</li>
+            <li>UI-элементы;</li>
+            <li>адаптивные состояния;</li>
+            <li>подготовка макета к сборке.</li>
+          </ul>
+        </article>
+
+        <article class="service-card">
+          <h3>Промпты для нейросетей</h3>
+          <p>Пишу промпты под конкретные задачи: контент, изображения, анализ, идеи, сценарии и подготовку материалов.</p>
+          <p><strong>Что входит:</strong></p>
+          <ul class="service-list">
+            <li>промпты для текстов;</li>
+            <li>промпты для изображений;</li>
+            <li>промпты для анализа;</li>
+            <li>промпты для генерации идей;</li>
+            <li>сценарии работы с нейросетями;</li>
+            <li>инструкции под повторяющиеся задачи;</li>
+            <li>тестирование промптов;</li>
+            <li>доработка под нужный результат.</li>
+          </ul>
+        </article>
+
+        <article class="service-card">
+          <h3>ИИ-агенты</h3>
+          <p>Разрабатываю ИИ-агентов под конкретные процессы: консультации, обработку запросов, сбор информации, подготовку ответов, работу с клиентами или внутренние задачи.</p>
+          <p><strong>Что входит:</strong></p>
+          <ul class="service-list">
+            <li>задача агента;</li>
+            <li>сценарий общения;</li>
+            <li>база инструкций;</li>
+            <li>логика ответов;</li>
+            <li>роли и ограничения;</li>
+            <li>тестирование поведения;</li>
+            <li>настройка под процесс;</li>
+            <li>подготовка к использованию.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <a class="brand" href="index.html">Евгений Ворошилов</a>
+        <p class="footer-note">Сайты, digital-упаковка и AI-решения для экспертов и малого бизнеса.</p>
+      </div>
+      <div class="footer-copy">© <span id="year"></span> Евгений Ворошилов. Все права защищены.</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

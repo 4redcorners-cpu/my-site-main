@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Попрыгунчик</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #1a1a2e;
+      font-family: system-ui, sans-serif;
+      overflow: hidden;
+    }
+    h1 {
+      color: #eee;
+      font-size: 1.25rem;
+      margin: 0 0 0.5rem;
+    }
+    #wrap {
+      position: relative;
+      width: 400px;
+      height: 600px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+    }
+    canvas {
+      display: block;
+      background: #87ceeb;
+    }
+    #gameOver {
+      position: absolute;
+      inset: 0;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.72);
+      color: #fff;
+      gap: 1rem;
+    }
+    #gameOver.visible { display: flex; }
+    #gameOver h2 { margin: 0; font-size: 2rem; }
+    #gameOver button {
+      padding: 0.65rem 1.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      background: #4caf50;
+      color: #fff;
+      font-weight: 600;
+    }
+    #gameOver button:hover { filter: brightness(1.1); }
+    #hint {
+      color: #aaa;
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Попрыгунчик</h1>
+  <div id="wrap">
+    <canvas id="game" width="400" height="600" aria-label="Игровое поле"></canvas>
+    <div id="gameOver" role="dialog" aria-labelledby="goTitle">
+      <h2 id="goTitle">Game Over</h2>
+      <p id="finalScore"></p>
+      <button type="button" id="restart">Играть снова</button>
+    </div>
+  </div>
+  <p id="hint">← → или A D — движение · Пробел — дополнительный прыжок с земли</p>
+  <!-- Обычный скрипт (не module): так игра открывается по file:// без локального сервера. -->
+  <script src="game.js" defer></script>
+</body>
+</html>
