@@ -125,10 +125,19 @@
       letter-spacing: -0.02em;
     }
 
+    .scroll-float {
+      overflow: hidden;
+    }
+
+    .char {
+      display: inline-block;
+      will-change: opacity, transform;
+    }
+
     h1 {
       font-size: clamp(30px, 5vw, 56px);
       margin-bottom: 20px;
-      max-width: 14ch;
+      max-width: none;
     }
 
     .lead {
@@ -200,12 +209,36 @@
     }
 
     .skills li {
+      position: relative;
       border: 1px solid rgba(26, 35, 73, 0.28);
       border-radius: 14px;
       padding: 11px 13px;
       background: #ffffff;
       color: #111111;
       font-weight: 500;
+      transition:
+        transform 260ms ease,
+        box-shadow 260ms ease,
+        opacity 260ms ease,
+        filter 260ms ease,
+        border-color 260ms ease;
+      will-change: transform, opacity;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .skills:hover li {
+        opacity: 0.45;
+        filter: saturate(0.8);
+      }
+
+      .skills:hover li:hover {
+        opacity: 1;
+        filter: none;
+        transform: translateY(-6px);
+        box-shadow: 0 12px 28px rgba(20, 24, 60, 0.12);
+        border-color: rgba(20, 24, 60, 0.25);
+        z-index: 2;
+      }
     }
 
     .project {
@@ -218,7 +251,8 @@
       margin-top: 12px;
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
+      gap: 16px;
+      justify-items: center;
     }
 
     .project-block {
@@ -232,6 +266,9 @@
       display: block;
       text-decoration: none;
       color: var(--text);
+      perspective: 900px;
+      transform-style: preserve-3d;
+      width: 94%;
     }
 
     .project-thumb {
@@ -241,6 +278,8 @@
       border: 1px solid rgba(26, 35, 73, 0.28);
       border-radius: 14px;
       box-shadow: 0 8px 20px rgba(29, 36, 66, 0.12);
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+      will-change: transform;
     }
 
     .project-caption {
@@ -248,6 +287,24 @@
       font-size: 15px;
       color: var(--muted);
       line-height: 1.45;
+    }
+
+    .tilted-card-caption {
+      pointer-events: none;
+      position: fixed;
+      border-radius: 8px;
+      background: #ffffff;
+      border: 1px solid rgba(26, 35, 73, 0.2);
+      box-shadow: 0 10px 24px rgba(29, 36, 66, 0.16);
+      padding: 6px 10px;
+      font-size: 12px;
+      line-height: 1.2;
+      color: #2d2d2d;
+      opacity: 0;
+      transform: translate(-50%, -140%) rotate(0deg);
+      transition: opacity 0.18s ease;
+      z-index: 10;
+      white-space: nowrap;
     }
 
     .contacts-icons {
@@ -319,6 +376,10 @@
       .project-grid {
         grid-template-columns: 1fr;
       }
+
+      .tilted-card-caption {
+        display: none;
+      }
     }
   </style>
 </head>
@@ -330,7 +391,7 @@
       <div class="hero-grid">
         <div class="hero-content">
           <span class="eyebrow">Сайт-визитка</span>
-          <h1>Евгений Ворошилов</h1>
+          <h1>Евгений<br>Ворошилов</h1>
           <p class="lead">
             Специалист по нейросетям, vibe coding и созданию сайтов для экспертов, специалистов и малого
             бизнеса. Упаковываю идеи и услуги в современный, понятный и аккуратный digital-формат.
@@ -350,9 +411,10 @@
       <article class="card">
         <h2>Что я делаю</h2>
         <p>
-          Создаю сайты-визитки, одностраничные сайты и портфолио, которые не просто выглядят красиво,
-          а работают на задачу. Продумываю структуру, подачу, тексты и визуальный образ, чтобы сайт
-          вызывал доверие и помогал клиенту быстрее принять решение.
+          Создаю сайты-визитки, одностраничные сайты, портфолио и интернет-магазины, которые не только
+          хорошо выглядят, но и решают задачу. Продумываю структуру, подачу, тексты и визуальный образ
+          так, чтобы сайт вызывал доверие, понятно доносил ценность и помогал клиенту быстрее принять
+          решение.
         </p>
       </article>
     </section>
@@ -423,8 +485,119 @@
     <footer>© <span id="year"></span> Евгений Ворошилов. Сайт-визитка.</footer>
   </main>
 
+  <div class="tilted-card-caption" id="tilted-card-caption" aria-hidden="true"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    if (window.gsap && window.ScrollTrigger) {
+      gsap.registerPlugin(ScrollTrigger);
+
+      const applyScrollFloat = (selector, config = {}) => {
+        const {
+          animationDuration = 1,
+          ease = "back.inOut(2)",
+          scrollStart = "center bottom+=50%",
+          scrollEnd = "bottom bottom-=40%",
+          stagger = 0.03
+        } = config;
+
+        document.querySelectorAll(selector).forEach((el) => {
+          const sourceText = (el.textContent || "").trim();
+          if (!sourceText || el.dataset.scrollFloatReady === "true") return;
+
+          el.dataset.scrollFloatReady = "true";
+          el.classList.add("scroll-float");
+          el.textContent = "";
+
+          const fragment = document.createDocumentFragment();
+          sourceText.split("").forEach((char) => {
+            const span = document.createElement("span");
+            span.className = "char";
+            span.textContent = char === " " ? "\u00A0" : char;
+            fragment.appendChild(span);
+          });
+          el.appendChild(fragment);
+
+          const charElements = el.querySelectorAll(".char");
+          gsap.fromTo(
+            charElements,
+            {
+              opacity: 0,
+              yPercent: 120,
+              scaleY: 2.3,
+              scaleX: 0.7,
+              transformOrigin: "50% 0%"
+            },
+            {
+              duration: animationDuration,
+              ease,
+              opacity: 1,
+              yPercent: 0,
+              scaleY: 1,
+              scaleX: 1,
+              stagger,
+              scrollTrigger: {
+                trigger: el,
+                start: scrollStart,
+                end: scrollEnd,
+                scrub: true
+              }
+            }
+          );
+        });
+      };
+
+      applyScrollFloat("h2", { stagger: 0.03 });
+    }
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const isTouchDevice = window.matchMedia("(hover: none), (pointer: coarse)").matches;
+    const captionEl = document.getElementById("tilted-card-caption");
+
+    if (!reducedMotion && !isTouchDevice && captionEl) {
+      document.querySelectorAll(".project-entry").forEach((entry) => {
+        const image = entry.querySelector(".project-thumb");
+        const title = entry.querySelector(".project-caption strong");
+        if (!image) return;
+
+        const rotateAmplitude = 7;
+        const scaleOnHover = 1.06;
+
+        const onMove = (event) => {
+          const rect = image.getBoundingClientRect();
+          const offsetX = event.clientX - rect.left - rect.width / 2;
+          const offsetY = event.clientY - rect.top - rect.height / 2;
+
+          const rotateX = (offsetY / (rect.height / 2)) * -rotateAmplitude;
+          const rotateY = (offsetX / (rect.width / 2)) * rotateAmplitude;
+
+          image.style.transform =
+            "rotateX(" + rotateX.toFixed(2) + "deg) rotateY(" + rotateY.toFixed(2) + "deg) scale(" + scaleOnHover + ")";
+          image.style.boxShadow = "0 18px 36px rgba(29, 36, 66, 0.26)";
+
+          captionEl.style.left = event.clientX + "px";
+          captionEl.style.top = event.clientY + "px";
+        };
+
+        const onEnter = () => {
+          captionEl.textContent = title ? title.textContent.trim() : "Проект";
+          captionEl.style.opacity = "1";
+        };
+
+        const onLeave = () => {
+          image.style.transform = "";
+          image.style.boxShadow = "";
+          captionEl.style.opacity = "0";
+        };
+
+        entry.addEventListener("mousemove", onMove);
+        entry.addEventListener("mouseenter", onEnter);
+        entry.addEventListener("mouseleave", onLeave);
+      });
+    }
   </script>
 </body>
 </html>
