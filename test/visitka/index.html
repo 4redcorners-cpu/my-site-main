@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Евгений Ворошилов - сайт-визитка</title>
+  <meta name="description" content="Сайт-визитка Евгения Ворошилова: нейросети, vibe coding, создание сайтов для экспертов и малого бизнеса." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f4f7ff;
+      --surface: #ffffff;
+      --text: #1d2442;
+      --muted: #475175;
+      --accent: #2a8f72;
+      --accent-2: #4c62bf;
+      --line: rgba(26, 35, 73, 0.16);
+      --shadow: 0 20px 40px rgba(35, 47, 95, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Manrope", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 10%, rgba(74, 154, 128, 0.14), transparent 34%),
+        radial-gradient(circle at 82% 12%, rgba(76, 98, 191, 0.18), transparent 37%),
+        linear-gradient(135deg, #f7f9ff 0%, #edf2ff 50%, #e9eeff 100%);
+      min-height: 100vh;
+      line-height: 1.65;
+      position: relative;
+      transition: background 0.35s ease, color 0.35s ease;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: url("./pattern-bg.png");
+      background-size: 300px;
+      background-repeat: repeat;
+      opacity: 1;
+      z-index: 0;
+    }
+
+    .grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.2;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.13) 0.7px, transparent 0.7px);
+      background-size: 3px 3px;
+      mix-blend-mode: soft-light;
+    }
+
+    .wrapper {
+      width: min(1100px, 92vw);
+      margin: 0 auto;
+      padding: 44px 0 72px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero {
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      padding: clamp(28px, 5vw, 54px);
+      background: #ffffff;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      transform: translateY(12px);
+      opacity: 0;
+      animation: reveal 900ms ease forwards;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(240px, 320px);
+      gap: clamp(20px, 4vw, 36px);
+      align-items: center;
+    }
+
+    .hero-content {
+      min-width: 0;
+    }
+
+    .hero-photo-wrap {
+      justify-self: end;
+    }
+
+    .hero-photo {
+      width: min(320px, 100%);
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      box-shadow: 0 16px 36px rgba(4, 9, 29, 0.35);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(118, 244, 199, 0.55);
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 12px;
+      margin-bottom: 18px;
+    }
+
+    h1, h2 {
+      font-family: "Unbounded", sans-serif;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    h1 {
+      font-size: clamp(30px, 5vw, 56px);
+      margin-bottom: 20px;
+      max-width: 14ch;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: clamp(17px, 2.2vw, 21px);
+      max-width: 66ch;
+    }
+
+    .hero-ctas {
+      margin-top: 28px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      text-decoration: none;
+      color: #091022;
+      background: linear-gradient(120deg, var(--accent), #9dffda);
+      border-radius: 14px;
+      padding: 12px 18px;
+      font-weight: 700;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 26px rgba(118, 244, 199, 0.3);
+    }
+
+    .btn.secondary {
+      color: var(--text);
+      background: transparent;
+      border: 1px solid var(--line);
+    }
+
+    section {
+      margin-top: 28px;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: reveal 700ms ease forwards;
+      animation-delay: var(--delay, 0ms);
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: clamp(22px, 4vw, 36px);
+      background: #ffffff;
+      backdrop-filter: blur(6px);
+    }
+
+    h2 {
+      font-size: clamp(22px, 3vw, 34px);
+      margin-bottom: 12px;
+    }
+
+    p {
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .skills {
+      margin-top: 16px;
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+    }
+
+    .skills li {
+      border: 1px solid rgba(26, 35, 73, 0.28);
+      border-radius: 14px;
+      padding: 11px 13px;
+      background: #ffffff;
+      color: #111111;
+      font-weight: 500;
+    }
+
+    .project {
+      margin-top: 12px;
+      border-left: 3px solid var(--accent-2);
+      padding-left: 14px;
+    }
+
+    .project-grid {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .project-block {
+      aspect-ratio: 1 / 1;
+      border: 1px dashed rgba(26, 35, 73, 0.34);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.65);
+    }
+
+    .project-entry {
+      display: block;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .project-thumb {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border: 1px solid rgba(26, 35, 73, 0.28);
+      border-radius: 14px;
+      box-shadow: 0 8px 20px rgba(29, 36, 66, 0.12);
+    }
+
+    .project-caption {
+      margin-top: 8px;
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .contacts {
+      margin-top: 14px;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .contacts a {
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px dashed rgba(29, 36, 66, 0.45);
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .contacts a:hover {
+      color: var(--accent);
+      border-color: rgba(118, 244, 199, 0.7);
+    }
+
+    footer {
+      margin-top: 28px;
+      color: rgba(29, 36, 66, 0.72);
+      text-align: center;
+      font-size: 14px;
+    }
+
+    @keyframes reveal {
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-photo-wrap {
+        justify-self: start;
+      }
+
+      .hero-photo {
+        width: min(260px, 85vw);
+      }
+
+      .hero-ctas {
+        flex-direction: column;
+      }
+
+      .btn {
+        text-align: center;
+      }
+
+      .project-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="grain"></div>
+
+  <main class="wrapper">
+    <header class="hero">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <span class="eyebrow">Digital-профиль</span>
+          <h1>Евгений Ворошилов</h1>
+          <p class="lead">
+            Специалист по нейросетям, vibe coding и созданию сайтов для экспертов, специалистов и малого
+            бизнеса. Упаковываю идеи и услуги в современный, понятный и аккуратный digital-формат.
+          </p>
+          <div class="hero-ctas">
+            <a class="btn" href="https://t.me/evgenivoroshilov" target="_blank" rel="noopener noreferrer">Написать в Telegram</a>
+            <a class="btn secondary" href="mailto:rednine@ya.ru">Связаться по Email</a>
+          </div>
+        </div>
+        <div class="hero-photo-wrap">
+          <img class="hero-photo" src="./profile-photo.png" alt="Евгений Ворошилов" />
+        </div>
+      </div>
+    </header>
+
+    <section style="--delay: 120ms">
+      <article class="card">
+        <h2>Что я делаю</h2>
+        <p>
+          Создаю сайты-визитки, одностраничные сайты и портфолио, которые не просто выглядят красиво,
+          а работают на задачу. Продумываю структуру, подачу, тексты и визуальный образ, чтобы сайт
+          вызывал доверие и помогал клиенту быстрее принять решение.
+        </p>
+      </article>
+    </section>
+
+    <section style="--delay: 220ms">
+      <article class="card">
+        <h2>Мои навыки</h2>
+        <ul class="skills">
+          <li>Создание сайтов-визиток, одностраничных сайтов и сайтов-портфолио</li>
+          <li>Разработка прототипа сайта</li>
+          <li>Упаковка услуг, экспертов и проектов</li>
+          <li>Подготовка текстов для сайта</li>
+          <li>Продумывание структуры, блоков и разделов</li>
+          <li>Современное визуальное оформление</li>
+          <li>Адаптация сайта под задачу клиента</li>
+          <li>Сбор и анализ информации перед началом работы</li>
+          <li>Доработка и финальная упаковка сайта</li>
+          <li>Работа с нейросетями и AI-инструментами</li>
+          <li>Vibe coding</li>
+        </ul>
+      </article>
+    </section>
+
+    <section style="--delay: 320ms">
+      <article class="card">
+        <h2>Пример проекта</h2>
+        <div class="project-grid" aria-label="Примеры проектов">
+          <div class="project-entry">
+            <img class="project-thumb" src="./game-preview.png" alt="Превью проекта Игра Попрыгунчик" />
+            <p class="project-caption">Игра «Попрыгунчик»<br>Яркий концепт динамичной аркады.</p>
+          </div>
+          <a class="project-entry" href="https://sparkle-paws-site.lovable.app/" target="_blank" rel="noopener noreferrer">
+            <img class="project-thumb" src="./grooming-preview.png" alt="Превью сайта студии груминга" />
+            <p class="project-caption">Сайт студии груминга<br>Нежный сайт о заботе о питомцах.</p>
+          </a>
+          <div class="project-block"></div>
+        </div>
+      </article>
+    </section>
+
+    <section style="--delay: 420ms">
+      <article class="card">
+        <h2>Контакты</h2>
+        <p>
+          Если тебе нужен сайт-визитка, портфолио или понятная digital-упаковка проекта - напиши мне.
+          Обсудим задачу, подберем формат и соберем решение, которое работает на результат.
+        </p>
+        <ul class="contacts">
+          <li><strong>VK:</strong> <a href="https://vk.com/voroshilovevgeny" target="_blank" rel="noopener noreferrer">vk.com/voroshilovevgeny</a></li>
+          <li><strong>MAX:</strong> <a href="https://max.ru/u/f9LHodD0cOLtBTAtkMWYJZFcamuwqAwYcvVHDooAM1fEtYRtKJqG86VoRUI" target="_blank" rel="noopener noreferrer">max.ru - профиль</a></li>
+          <li><strong>Telegram:</strong> <a href="https://t.me/evgenivoroshilov" target="_blank" rel="noopener noreferrer">@evgenivoroshilov</a></li>
+          <li><strong>Email:</strong> <a href="mailto:rednine@ya.ru">rednine@ya.ru</a></li>
+        </ul>
+      </article>
+    </section>
+
+    <footer>© <span id="year"></span> Евгений Ворошилов. Сайт-визитка.</footer>
+  </main>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

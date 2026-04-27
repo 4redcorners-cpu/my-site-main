@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Тест — Рассчитать стоимость</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Unbounded:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header" id="top">
+    <div class="container nav-wrap">
+      <a class="brand" href="index.html">Евгений Ворошилов</a>
+      <nav class="site-nav" id="site-nav" aria-label="Основная навигация">
+        <a href="index.html">Обо мне</a>
+        <a href="services.html">Услуги</a>
+        <a href="works.html">Портфолио</a>
+        <a href="cost.html">Стоимость</a>
+        <a href="contacts.html">Контакты</a>
+        <a href="test.html">Тест</a>
+        <a href="test/visitka/index.html" target="_blank" rel="noopener noreferrer">Сайт-визитка</a>
+      </nav>
+      <div class="header-actions">
+        <button class="settings-toggle" type="button" aria-expanded="false" aria-controls="settings-panel" aria-label="Настройки темы и цвета">⚙</button>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Меню</button>
+      </div>
+    </div>
+    <aside class="settings-panel" id="settings-panel" aria-label="Настройки сайта" hidden>
+      <p class="settings-title">Настройки</p>
+      <div class="settings-group">
+        <p class="settings-label">Тема</p>
+        <div class="settings-options">
+          <button class="option-btn" type="button" data-theme-option="light">Светлая</button>
+          <button class="option-btn" type="button" data-theme-option="dark">Тёмная</button>
+        </div>
+      </div>
+      <div class="settings-group">
+        <p class="settings-label">Основной цвет</p>
+        <div class="settings-options settings-colors">
+          <button class="color-btn" type="button" data-accent-option="orange" aria-label="Оранжевый"></button>
+          <button class="color-btn" type="button" data-accent-option="blue" aria-label="Синий"></button>
+          <button class="color-btn" type="button" data-accent-option="purple" aria-label="Фиолетовый"></button>
+          <button class="color-btn" type="button" data-accent-option="neon" aria-label="Неоновый"></button>
+          <button class="color-btn" type="button" data-accent-option="dark-yellow" aria-label="Тёмно-жёлтый"></button>
+          <button class="color-btn" type="button" data-accent-option="graphite" aria-label="Белый"></button>
+        </div>
+      </div>
+    </aside>
+  </header>
+
+  <main class="section">
+    <div class="container">
+      <h1>Тест: Рассчитать стоимость</h1>
+      <nav class="test-menu" aria-label="Дополнительное тест-меню">
+        <a href="test.html">Тест</a>
+        <a href="test-calc.html">Рассчитать стоимость</a>
+        <a href="test/visitka/index.html" target="_blank" rel="noopener noreferrer">Сайт-визитка</a>
+      </nav>
+      <p class="section-intro">
+        Тестовый калькулятор предварительной стоимости. Точный расчёт делается после обсуждения задачи.
+      </p>
+      <section class="calc-layout">
+        <form class="calc-form" id="costCalcForm">
+          <label class="calc-field">
+            <span>Тип проекта</span>
+            <select name="projectType" id="projectType">
+              <option value="landing">Сайт / лендинг</option>
+              <option value="shop">Интернет-магазин</option>
+              <option value="android">Android-приложение</option>
+              <option value="mvp">Прототип / MVP</option>
+              <option value="design">Web-дизайн</option>
+              <option value="prompts">Промпты / ИИ-агент</option>
+            </select>
+          </label>
+
+          <label class="calc-field">
+            <span>Количество блоков / экранов</span>
+            <input type="range" id="blocksRange" min="4" max="24" step="1" value="8">
+            <strong id="blocksValue">8</strong>
+          </label>
+
+          <label class="calc-field">
+            <span>Сложность</span>
+            <select name="complexity" id="complexity">
+              <option value="1">Базовая</option>
+              <option value="1.2">Средняя</option>
+              <option value="1.45">Высокая</option>
+            </select>
+          </label>
+
+          <label class="calc-field">
+            <span>Срочность</span>
+            <select name="urgency" id="urgency">
+              <option value="1">Стандарт</option>
+              <option value="1.2">Срочно</option>
+              <option value="1.35">Очень срочно</option>
+            </select>
+          </label>
+
+          <fieldset class="calc-checks">
+            <legend>Дополнительно</legend>
+            <label><input type="checkbox" value="7000" class="extra-item"> Тексты под ключ (+7 000)</label>
+            <label><input type="checkbox" value="9000" class="extra-item"> Дизайн с нуля (+9 000)</label>
+            <label><input type="checkbox" value="6000" class="extra-item"> Графика / визуалы (+6 000)</label>
+            <label><input type="checkbox" value="8000" class="extra-item"> Интеграции и формы (+8 000)</label>
+            <label><input type="checkbox" value="5000" class="extra-item"> Поддержка после запуска (+5 000)</label>
+          </fieldset>
+        </form>
+
+        <aside class="calc-result" aria-live="polite">
+          <h3>Предварительный расчёт</h3>
+          <p>Ориентировочная стоимость:</p>
+          <p class="calc-price" id="calcPrice">от 0 до 0 ₽</p>
+          <p>Срок реализации:</p>
+          <p class="calc-time" id="calcTime">~ 0 дней</p>
+          <p class="calc-note">Расчёт предварительный. Точная стоимость зависит от деталей проекта.</p>
+        </aside>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <a class="brand" href="index.html">Евгений Ворошилов</a>
+        <p class="footer-note">Сайты, digital-упаковка и AI-решения для экспертов и малого бизнеса.</p>
+      </div>
+      <div class="footer-copy">© <span id="year"></span> Евгений Ворошилов. Все права защищены.</div>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+  <script>
+    const baseByType = {
+      landing: 35000,
+      shop: 70000,
+      android: 80000,
+      mvp: 50000,
+      design: 30000,
+      prompts: 25000
+    };
+
+    const typeEl = document.getElementById("projectType");
+    const blocksEl = document.getElementById("blocksRange");
+    const blocksValueEl = document.getElementById("blocksValue");
+    const complexityEl = document.getElementById("complexity");
+    const urgencyEl = document.getElementById("urgency");
+    const priceEl = document.getElementById("calcPrice");
+    const timeEl = document.getElementById("calcTime");
+    const extraEls = Array.from(document.querySelectorAll(".extra-item"));
+
+    function formatRub(v) {
+      return `${Math.round(v).toLocaleString("ru-RU")} ₽`;
+    }
+
+    function recalcCost() {
+      const base = baseByType[typeEl.value] || 0;
+      const blocks = Number(blocksEl.value);
+      const complexity = Number(complexityEl.value);
+      const urgency = Number(urgencyEl.value);
+      const extras = extraEls.reduce((sum, el) => sum + (el.checked ? Number(el.value) : 0), 0);
+
+      blocksValueEl.textContent = blocks;
+
+      const blocksCost = blocks * 1800;
+      const total = (base + blocksCost + extras) * complexity * urgency;
+      const min = total * 0.92;
+      const max = total * 1.1;
+
+      const baseDays = 6 + Math.ceil(blocks * 0.8);
+      const estimatedDays = Math.ceil(baseDays * complexity / urgency);
+
+      priceEl.textContent = `от ${formatRub(min)} до ${formatRub(max)}`;
+      timeEl.textContent = `~ ${estimatedDays} дней`;
+    }
+
+    [typeEl, blocksEl, complexityEl, urgencyEl, ...extraEls].forEach((el) => {
+      el.addEventListener("input", recalcCost);
+      el.addEventListener("change", recalcCost);
+    });
+
+    recalcCost();
+  </script>
+</body>
+</html>

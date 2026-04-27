@@ -10,7 +10,8 @@ const accentButtons = document.querySelectorAll("[data-accent-option]");
 const THEME_KEY = "site-theme";
 const ACCENT_KEY = "site-accent";
 const defaultTheme = "light";
-const defaultAccent = "blue";
+const defaultAccent = "orange";
+const allowedAccents = new Set(["orange", "blue", "purple", "neon", "dark-yellow", "graphite"]);
 
 function setTheme(theme) {
   document.body.dataset.theme = theme;
@@ -28,8 +29,10 @@ function setAccent(accent) {
   });
 }
 
-setTheme(localStorage.getItem(THEME_KEY) || defaultTheme);
-setAccent(localStorage.getItem(ACCENT_KEY) || defaultAccent);
+const savedTheme = localStorage.getItem(THEME_KEY) || defaultTheme;
+const savedAccent = localStorage.getItem(ACCENT_KEY);
+setTheme(savedTheme);
+setAccent(allowedAccents.has(savedAccent) ? savedAccent : defaultAccent);
 
 const currentPage = window.location.pathname.split("/").pop() || "index.html";
 navLinks.forEach((link) => {

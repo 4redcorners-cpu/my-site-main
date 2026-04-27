@@ -6,6 +6,8 @@
 
 const CANVAS_WIDTH = 400;
 const CANVAS_HEIGHT = 600;
+const LEADERBOARD_KEY = "jamp_jamp_leaderboard_v1";
+const LEADERBOARD_LIMIT = 5;
 
 /** Гравитация (пиксели за кадр²), ускорение вниз. */
 const GRAVITY = 0.48;
@@ -44,6 +46,7 @@ const PlatformType = {
   BOUNCE: "BOUNCE",
   SINKING: "SINKING",
   MOVING: "MOVING",
+  GLASS: "GLASS",
 };
 
 /** Размер персонажа (квадрат). */
@@ -245,11 +248,21 @@ class Platform {
     this.speed = this.type === PlatformType.MOVING ? 1 + Math.random() * 0.8 : 0;
     /** Направление MOVING платформы: 1 вправо, -1 влево. */
     this.direction = Math.random() < 0.5 ? -1 : 1;
+    /** Стадия трещин для стеклянной платформы (0..3). */
+    this.crackLevel = 0;
+    /** Разрушена ли стеклянная платформа. */
+    this.broken = false;
   }
 
   /** Регистрирует факт прыжка героя от платформы (коллизия сверху). */
   onBounce() {
     this.bounceCount += 1;
+    if (this.type === PlatformType.GLASS) {
+      this.crackLevel = Math.min(3, this.crackLevel + 1);
+      this.offsetY = PLATFORM_BUMP_OFFSET * 0.6;
+      if (this.crackLevel >= 3) this.broken = true;
+      return;
+    }
     // Визуальный bump (offsetY) и физическое проседание (targetY) независимы.
     this.offsetY = PLATFORM_BUMP_OFFSET;
     if (this.type === PlatformType.SINKING) {
@@ -359,6 +372,9 @@ class Platform {
     } else if (this.type === PlatformType.MOVING) {
       fill = "#42a5f5";
       stroke = "#1565c0";
+    } else if (this.type === PlatformType.GLASS) {
+      fill = "rgba(196, 240, 255, 0.48)";
+      stroke = "#9ed8ef";
     } else {
       fill = "#2e7d32";
       stroke = "#1b5e20";
@@ -370,6 +386,21 @@ class Platform {
     ctx.rect(sx, sy, this.width, this.height);
     ctx.fill();
     ctx.strokeRect(sx + 0.5, sy + 0.5, this.width - 1, this.height - 1);
+
+    if (this.type === PlatformType.GLASS && this.crackLevel > 0) {
+      ctx.strokeStyle = "rgba(120, 150, 170, 0.95)";
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(sx + 10, sy + 2);
+      ctx.lineTo(sx + this.width / 2, sy + this.height - 2);
+      ctx.lineTo(sx + this.width - 12, sy + 3);
+      if (this.crackLevel >= 2) {
+        ctx.moveTo(sx + 6, sy + this.height - 3);
+        ctx.lineTo(sx + this.width / 2 - 4, sy + 3);
+        ctx.lineTo(sx + this.width - 8, sy + this.height - 4);
+      }
+      ctx.stroke();
+    }
   }
 }
 
@@ -507,8 +538,76 @@ class Game {
     this.gameOverEl = document.getElementById("gameOver");
     this.finalScoreEl = document.getElementById("finalScore");
     this.restartBtn = document.getElementById("restart");
+    this.pinScoreBtn = document.getElementById("pinScore");
+    this.leaderboardListEl = document.getElementById("leaderboardList");
+    this.currentScore = 0;
+    this.leaderboard = this.#loadLeaderboard();
     this.restartBtn.addEventListener("click", () => this.start());
+    this.pinScoreBtn.addEventListener("click", () => this.#pinCurrentScore());
     window.addEventListener("keydown", (e) => this.#handleRestartHotkey(e));
+    this.#renderLeaderboard();
+  }
+
+  #loadLeaderboard() {
+    try {
+      const raw = localStorage.getItem(LEADERBOARD_KEY);
+      if (!raw) return [];
+      const parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed)) return [];
+      return parsed
+        .filter((item) => item && typeof item.name === "string" && Number.isFinite(item.score))
+        .sort((a, b) => b.score - a.score)
+        .slice(0, LEADERBOARD_LIMIT);
+    } catch (_error) {
+      return [];
+    }
+  }
+
+  #saveLeaderboard() {
+    localStorage.setItem(LEADERBOARD_KEY, JSON.stringify(this.leaderboard));
+  }
+
+  #medalLabel(rank) {
+    return `${rank} место`;
+  }
+
+  #renderLeaderboard() {
+    if (!this.leaderboardListEl) return;
+    this.leaderboardListEl.innerHTML = "";
+    if (this.leaderboard.length === 0) {
+      const empty = document.createElement("li");
+      empty.textContent = "Пока нет результатов";
+      this.leaderboardListEl.append(empty);
+      return;
+    }
+    this.leaderboard.forEach((item, index) => {
+      const rank = index + 1;
+      const li = document.createElement("li");
+      if (rank <= 3) li.classList.add(`top-${rank}`);
+      li.innerHTML = `
+        <span class="lb-rank">${this.#medalLabel(rank)}</span>
+        <span>${item.name}</span>
+        <span class="lb-score">${item.score}</span>
+      `;
+      this.leaderboardListEl.append(li);
+    });
+  }
+
+  #pushScore(name, score) {
+    this.leaderboard.push({ name, score });
+    this.leaderboard = this.leaderboard
+      .sort((a, b) => b.score - a.score)
+      .slice(0, LEADERBOARD_LIMIT);
+    this.#saveLeaderboard();
+    this.#renderLeaderboard();
+  }
+
+  #pinCurrentScore() {
+    const entered = window.prompt("Введите имя игрока:");
+    if (!entered) return;
+    const name = entered.trim().slice(0, 20);
+    if (!name) return;
+    this.#pushScore(name, this.currentScore);
   }
 
   /** Перезапускает игру по Enter, только если открыт экран Game Over. */
@@ -540,7 +639,6 @@ class Game {
       PlatformType.NORMAL,
     );
     this.platforms.push(firstPlatform);
-
     let anchorPlatform = firstPlatform;
     while (anchorPlatform.y > this.cameraY - MAX_VERTICAL_GAP * 2 && this.platforms.length < MAX_ACTIVE_PLATFORMS) {
       const next = this.#spawnPlatformRowAbove(anchorPlatform);
@@ -669,13 +767,14 @@ class Game {
     return platform;
   }
 
-  /** Выбирает тип новой платформы: 60% обычные, 15% прыгучие, 15% тонущие, 10% плавающие. */
+  /** Выбирает тип новой платформы, включая стеклянные по всему ранy. */
   #randomPlatformType() {
     const r = Math.random();
-    if (r < 0.6) return PlatformType.NORMAL;
-    if (r < 0.75) return PlatformType.BOUNCE;
-    if (r < 0.9) return PlatformType.SINKING;
-    return PlatformType.MOVING;
+    if (r < 0.5) return PlatformType.NORMAL;
+    if (r < 0.65) return PlatformType.BOUNCE;
+    if (r < 0.8) return PlatformType.SINKING;
+    if (r < 0.9) return PlatformType.MOVING;
+    return PlatformType.GLASS;
   }
 
   /** Поднимает камеру вместе с игроком, создавая ощущение бесконечного восхождения. */
@@ -715,7 +814,9 @@ class Game {
       const stacked = kept.some(
         (k) =>
           k.type !== PlatformType.SINKING &&
+          k.type !== PlatformType.GLASS &&
           p.type !== PlatformType.SINKING &&
+          p.type !== PlatformType.GLASS &&
           Math.abs(k.y - p.y) < PLATFORM_STACK_CULL_DY &&
           this.#overlapX(k.x, k.width, p.x, p.width, PLATFORM_X_PADDING),
       );
@@ -739,7 +840,8 @@ class Game {
       height: this.player.height,
     };
 
-    for (const p of this.platforms) {
+    for (let i = 0; i < this.platforms.length; i++) {
+      const p = this.platforms[i];
       const plat = { x: p.x, y: p.y, width: p.width, height: p.height };
       if (!rectsOverlap(playerBox, plat)) continue;
 
@@ -753,6 +855,9 @@ class Game {
           this.player.jump(BOUNCE_JUMP_MULTIPLIER);
         } else {
           this.player.jump(1);
+        }
+        if (p.type === PlatformType.GLASS && p.broken) {
+          this.platforms.splice(i, 1);
         }
         break;
       }
@@ -775,8 +880,10 @@ class Game {
   #triggerGameOver(score) {
     this.running = false;
     this.input.clearJumpQueue();
+    this.currentScore = score;
     this.finalScoreEl.textContent = `Счёт: ${score}`;
     this.gameOverEl.classList.add("visible");
+    this.#renderLeaderboard();
   }
 
   /** Один игровой тик: ввод, физика, коллизии, камера, рециклинг платформ, проверка проигрыша. */

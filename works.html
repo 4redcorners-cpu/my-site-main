@@ -42,6 +42,7 @@
           <button class="color-btn" type="button" data-accent-option="purple" aria-label="Фиолетовый"></button>
           <button class="color-btn" type="button" data-accent-option="neon" aria-label="Неоновый"></button>
           <button class="color-btn" type="button" data-accent-option="dark-yellow" aria-label="Тёмно-жёлтый"></button>
+          <button class="color-btn" type="button" data-accent-option="graphite" aria-label="Белый"></button>
         </div>
       </div>
     </aside>
@@ -50,16 +51,27 @@
   <main class="section">
     <div class="container">
       <h1>Портфолио</h1>
-      <article class="portfolio-item">
-        <a class="game-preview-link" href="jamp-jamp.html" aria-label="Открыть игру Попрыгунчик в полном экране">
-          <div class="game-preview-square">
-            <iframe src="games/jamp-jamp/index.html" title="Превью игры Попрыгунчик" loading="lazy" tabindex="-1"></iframe>
+      <div class="portfolio-grid">
+        <article class="portfolio-item">
+          <a class="game-preview-link" href="jamp-jamp.html" aria-label="Открыть игру Попрыгунчик в полном экране">
+            <div class="game-preview-square">
+              <iframe src="games/jamp-jamp/index.html" title="Превью игры Попрыгунчик" loading="lazy" tabindex="-1"></iframe>
+            </div>
+          </a>
+          <p class="portfolio-description">
+            Попрыгунчик — аркадная HTML5 игра на Canvas. Наведи курсор или нажми на карточку, чтобы открыть игру на отдельной странице во весь экран.
+          </p>
+        </article>
+
+        <article class="portfolio-item">
+          <div class="game-preview-square placeholder-square" aria-label="Пустая карточка проекта">
+            <span>Скоро здесь будет новый проект</span>
           </div>
-        </a>
-        <p class="portfolio-description">
-          Попрыгунчик — аркадная HTML5 игра на Canvas. Наведи курсор или нажми на карточку, чтобы открыть игру на отдельной странице во весь экран.
-        </p>
-      </article>
+          <p class="portfolio-description">
+            Карточка-заглушка для следующего проекта в портфолио.
+          </p>
+        </article>
+      </div>
     </div>
   </main>
 
