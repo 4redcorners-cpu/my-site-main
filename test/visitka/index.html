@@ -250,23 +250,35 @@
       line-height: 1.45;
     }
 
-    .contacts {
+    .contacts-icons {
       margin-top: 14px;
-      list-style: none;
-      display: grid;
+      display: flex;
+      flex-wrap: wrap;
       gap: 10px;
     }
 
-    .contacts a {
-      color: var(--text);
-      text-decoration: none;
-      border-bottom: 1px dashed rgba(29, 36, 66, 0.45);
-      transition: color 0.2s ease, border-color 0.2s ease;
+    .contact-icon-link {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .contacts a:hover {
-      color: var(--accent);
-      border-color: rgba(118, 244, 199, 0.7);
+    .contact-icon-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(29, 36, 66, 0.18);
+    }
+
+    .contact-icon {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     footer {
@@ -317,7 +329,7 @@
     <header class="hero">
       <div class="hero-grid">
         <div class="hero-content">
-          <span class="eyebrow">Digital-профиль</span>
+          <span class="eyebrow">Сайт-визитка</span>
           <h1>Евгений Ворошилов</h1>
           <p class="lead">
             Специалист по нейросетям, vibe coding и созданию сайтов для экспертов, специалистов и малого
@@ -366,17 +378,20 @@
 
     <section style="--delay: 320ms">
       <article class="card">
-        <h2>Пример проекта</h2>
+        <h2>Мое портфолио</h2>
         <div class="project-grid" aria-label="Примеры проектов">
-          <div class="project-entry">
+          <a class="project-entry" href="https://4redcorners-cpu.github.io/my-site-main/jamp-jamp.html" target="_blank" rel="noopener noreferrer">
             <img class="project-thumb" src="./game-preview.png" alt="Превью проекта Игра Попрыгунчик" />
-            <p class="project-caption">Игра «Попрыгунчик»<br>Яркий концепт динамичной аркады.</p>
-          </div>
+            <p class="project-caption"><strong>Игра «Попрыгунчик»</strong><br>Яркий концепт динамичной аркады.</p>
+          </a>
           <a class="project-entry" href="https://sparkle-paws-site.lovable.app/" target="_blank" rel="noopener noreferrer">
             <img class="project-thumb" src="./grooming-preview.png" alt="Превью сайта студии груминга" />
-            <p class="project-caption">Сайт студии груминга<br>Нежный сайт о заботе о питомцах.</p>
+            <p class="project-caption"><strong>Сайт студии груминга</strong><br>Нежный сайт о заботе о питомцах.</p>
           </a>
-          <div class="project-block"></div>
+          <a class="project-entry" href="https://github.com/4redcorners-cpu/PomodoroApp" target="_blank" rel="noopener noreferrer">
+            <img class="project-thumb" src="./todo-preview.png" alt="Превью проекта Приложение Список дел" />
+            <p class="project-caption"><strong>Приложение «Список дел»</strong><br>Чистый интерфейс для планирования задач.</p>
+          </a>
         </div>
       </article>
     </section>
@@ -388,12 +403,20 @@
           Если тебе нужен сайт-визитка, портфолио или понятная digital-упаковка проекта - напиши мне.
           Обсудим задачу, подберем формат и соберем решение, которое работает на результат.
         </p>
-        <ul class="contacts">
-          <li><strong>VK:</strong> <a href="https://vk.com/voroshilovevgeny" target="_blank" rel="noopener noreferrer">vk.com/voroshilovevgeny</a></li>
-          <li><strong>MAX:</strong> <a href="https://max.ru/u/f9LHodD0cOLtBTAtkMWYJZFcamuwqAwYcvVHDooAM1fEtYRtKJqG86VoRUI" target="_blank" rel="noopener noreferrer">max.ru - профиль</a></li>
-          <li><strong>Telegram:</strong> <a href="https://t.me/evgenivoroshilov" target="_blank" rel="noopener noreferrer">@evgenivoroshilov</a></li>
-          <li><strong>Email:</strong> <a href="mailto:rednine@ya.ru">rednine@ya.ru</a></li>
-        </ul>
+        <div class="contacts-icons" aria-label="Контакты">
+          <a class="contact-icon-link" href="https://t.me/evgenivoroshilov" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+            <img class="contact-icon" src="./telegram-logo.png" alt="Telegram">
+          </a>
+          <a class="contact-icon-link" href="https://vk.com/voroshilovevgeny" target="_blank" rel="noopener noreferrer" aria-label="ВКонтакте">
+            <img class="contact-icon" src="./vk-logo.webp" alt="ВКонтакте">
+          </a>
+          <a class="contact-icon-link" href="https://max.ru/u/f9LHodD0cOKjhtbXPb00fh3e6ht3EGp8Jz-BnKX4dITrMgc1u8qr-uJXEKU" target="_blank" rel="noopener noreferrer" aria-label="MAX">
+            <img class="contact-icon" src="./max-logo.webp" alt="MAX">
+          </a>
+          <a class="contact-icon-link" href="mailto:rednine@ya.ru" aria-label="Email">
+            <img class="contact-icon" src="./email-logo.jpeg" alt="Email">
+          </a>
+        </div>
       </article>
     </section>
 
