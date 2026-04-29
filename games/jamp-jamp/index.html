@@ -124,6 +124,47 @@
       font-size: 0.8rem;
       margin-top: 0.5rem;
     }
+    #mobileControls {
+      width: min(400px, 96vw);
+      margin-top: 10px;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      touch-action: none;
+      user-select: none;
+    }
+    .mc-group {
+      display: flex;
+      gap: 10px;
+    }
+    .mc-btn {
+      min-width: 62px;
+      min-height: 54px;
+      border: 0;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      font-size: 1.25rem;
+      font-weight: 700;
+      padding: 0 12px;
+      touch-action: manipulation;
+    }
+    .mc-btn.jump {
+      min-width: 94px;
+      background: #ff9800;
+      color: #1d1200;
+    }
+    .mc-btn:active,
+    .mc-btn.active {
+      filter: brightness(1.2);
+      transform: translateY(1px);
+    }
+    @media (hover: none) and (pointer: coarse) {
+      #mobileControls {
+        display: flex;
+      }
+    }
   </style>
 </head>
 <body>
@@ -145,6 +186,13 @@
     </div>
   </div>
   <p id="hint">← → или A D — движение · Пробел — дополнительный прыжок с земли</p>
+  <div id="mobileControls" aria-label="Мобильное управление">
+    <div class="mc-group">
+      <button type="button" class="mc-btn" id="mcLeft" aria-label="Двигаться влево">←</button>
+      <button type="button" class="mc-btn" id="mcRight" aria-label="Двигаться вправо">→</button>
+    </div>
+    <button type="button" class="mc-btn jump" id="mcJump" aria-label="Прыжок">Jump</button>
+  </div>
   <!-- Обычный скрипт (не module): так игра открывается по file:// без локального сервера. -->
   <script src="game.js" defer></script>
 </body>

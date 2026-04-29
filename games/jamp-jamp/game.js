@@ -210,6 +210,18 @@ class Input {
     if (this.left === this.right) return 0;
     return this.left ? -1 : 1;
   }
+
+  setLeft(value) {
+    this.left = value;
+  }
+
+  setRight(value) {
+    this.right = value;
+  }
+
+  queueJump() {
+    this.jumpQueued = true;
+  }
 }
 
 /**
@@ -947,4 +959,43 @@ class Game {
 const canvas = document.getElementById("game");
 const input = new Input();
 const game = new Game(canvas, input);
+
+function bindMobileControls(inputRef) {
+  const leftBtn = document.getElementById("mcLeft");
+  const rightBtn = document.getElementById("mcRight");
+  const jumpBtn = document.getElementById("mcJump");
+  if (!leftBtn || !rightBtn || !jumpBtn) return;
+
+  const bindHold = (btn, setState) => {
+    const release = () => {
+      setState(false);
+      btn.classList.remove("active");
+    };
+    btn.addEventListener("pointerdown", (e) => {
+      e.preventDefault();
+      setState(true);
+      btn.classList.add("active");
+      btn.setPointerCapture?.(e.pointerId);
+    });
+    btn.addEventListener("pointerup", release);
+    btn.addEventListener("pointercancel", release);
+    btn.addEventListener("pointerleave", release);
+    btn.addEventListener("lostpointercapture", release);
+  };
+
+  bindHold(leftBtn, (pressed) => inputRef.setLeft(pressed));
+  bindHold(rightBtn, (pressed) => inputRef.setRight(pressed));
+
+  jumpBtn.addEventListener("pointerdown", (e) => {
+    e.preventDefault();
+    inputRef.queueJump();
+    jumpBtn.classList.add("active");
+  });
+  const clearJumpActive = () => jumpBtn.classList.remove("active");
+  jumpBtn.addEventListener("pointerup", clearJumpActive);
+  jumpBtn.addEventListener("pointercancel", clearJumpActive);
+  jumpBtn.addEventListener("pointerleave", clearJumpActive);
+}
+
+bindMobileControls(input);
 game.start();
