@@ -125,14 +125,6 @@
       letter-spacing: -0.02em;
     }
 
-    .scroll-float {
-      overflow: hidden;
-    }
-
-    .char {
-      display: inline-block;
-      will-change: opacity, transform;
-    }
 
     h1 {
       font-size: clamp(30px, 5vw, 56px);
@@ -156,7 +148,7 @@
     .btn {
       text-decoration: none;
       color: #091022;
-      background: linear-gradient(120deg, var(--accent), #9dffda);
+      background: linear-gradient(120deg, #ff6f61, #ff8a7a);
       border-radius: 14px;
       padding: 12px 18px;
       font-weight: 700;
@@ -165,7 +157,7 @@
 
     .btn:hover {
       transform: translateY(-3px);
-      box-shadow: 0 10px 26px rgba(118, 244, 199, 0.3);
+      box-shadow: 0 10px 26px rgba(255, 111, 97, 0.35);
     }
 
     .btn.secondary {
@@ -205,17 +197,30 @@
       list-style: none;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-auto-rows: 1fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .skill-item {
+      position: relative;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      justify-items: center;
+      align-content: stretch;
+      align-self: stretch;
       gap: 10px;
     }
 
-    .skills li {
-      position: relative;
+    .skill-card {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-rows: auto 1fr;
       border: 1px solid rgba(26, 35, 73, 0.28);
       border-radius: 14px;
-      padding: 11px 13px;
       background: #ffffff;
       color: #111111;
-      font-weight: 500;
       transition:
         transform 260ms ease,
         box-shadow 260ms ease,
@@ -225,15 +230,34 @@
       will-change: transform, opacity;
     }
 
-    @media (hover: hover) and (pointer: fine) {
-      .skills:hover li {
-        opacity: 0.45;
-        filter: saturate(0.8);
-      }
+    .skill-icon {
+      width: 195px;
+      height: 195px;
+      object-fit: contain;
+      pointer-events: none;
+    }
 
-      .skills:hover li:hover {
-        opacity: 1;
-        filter: none;
+    .skill-summary {
+      padding: 12px 14px;
+      font-weight: 700;
+      line-height: 1.35;
+      text-align: center;
+    }
+
+    .skill-content {
+      border-top: 1px solid rgba(26, 35, 73, 0.14);
+      padding: 10px 14px 14px;
+      color: #1f2a4d;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    .skill-content strong {
+      font-weight: 700;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .skills:hover .skill-item:hover .skill-card {
         transform: translateY(-6px);
         box-shadow: 0 12px 28px rgba(20, 24, 60, 0.12);
         border-color: rgba(20, 24, 60, 0.25);
@@ -357,7 +381,12 @@
         grid-template-columns: 1fr;
       }
 
+      .hero-content {
+        order: 2;
+      }
+
       .hero-photo-wrap {
+        order: 1;
         justify-self: start;
       }
 
@@ -423,13 +452,55 @@
       <article class="card">
         <h2>Мои навыки</h2>
         <ul class="skills">
-          <li><strong>Создание и доработка сайтов</strong><br>Создаю сайты с нуля и дорабатываю уже существующие. Это могут быть сайты-визитки, одностраничные сайты, портфолио и интернет-магазины. Моя задача — сделать сайт понятным, аккуратным, современным и удобным для клиента.</li>
-          <li><strong>Упаковка услуг и проектов</strong><br>Оформляю услугу или проект так, чтобы человеку было сразу понятно, что именно ты предлагаешь, в чём ценность и почему стоит обратиться именно к тебе. Продумываю подачу, акценты и общую логику, чтобы сайт выглядел цельно и вызывал доверие.</li>
-          <li><strong>Подготовка текстов для сайта</strong><br>Готовлю тексты для основных блоков сайта: о специалисте, услугах, преимуществах, проекте и контактах. Делаю тексты понятными, структурными и живыми, чтобы они помогали клиенту быстро разобраться в предложении.</li>
-          <li><strong>Создание прототипов и тестирование проекта</strong><br>Перед оформлением сайта собираю прототип — черновую структуру страницы, где видно, какие блоки будут на сайте, в каком порядке они идут и как человек будет воспринимать информацию. Это помогает заранее проверить логику проекта и избежать хаоса на этапе дизайна и сборки.</li>
-          <li><strong>Веб-дизайн</strong><br>Продумываю внешний вид сайта: композицию, отступы, расположение блоков, визуальные акценты и общее впечатление. Важно, чтобы сайт выглядел современно, аккуратно и соответствовал задаче, а не был просто набором красивых элементов.</li>
-          <li><strong>Разработка и интеграция ботов и AI-решений для Telegram и VK</strong><br>Создаю и подключаю ботов и AI-решения под задачи бизнеса и общения с клиентами. Это может быть автоматизация ответов, работа с заявками, консультации, сопровождение клиента и другие сценарии, где важно упростить коммуникацию и сэкономить время.</li>
-          <li><strong>Продумывание интерфейсов и логики проекта</strong><br>Продумываю, как человек будет пользоваться сайтом или digital-проектом: куда он нажимает, что видит сначала и как понимает, что делать дальше. Это помогает сделать интерфейс не только красивым, но и удобным, понятным и логичным.</li>
+          <li class="skill-item">
+            <img class="skill-icon" src="./skill-icon-1.png" alt="" aria-hidden="true">
+            <div class="skill-card">
+              <div class="skill-summary">Создание сайтов</div>
+              <div class="skill-content">Разрабатываю сайты-визитки, лендинги, портфолио и простые магазины.<br><strong>Результат:</strong> понятный сайт, который презентует услугу и помогает получать заявки.</div>
+            </div>
+          </li>
+          <li class="skill-item">
+            <img class="skill-icon" src="./skill-icon-3.png" alt="" aria-hidden="true">
+            <div class="skill-card">
+              <div class="skill-summary">Упаковка проекта</div>
+              <div class="skill-content">Помогаю оформить услугу так, чтобы клиент сразу понял ценность предложения.<br><strong>Результат:</strong> ясная подача, сильные акценты и доверие.</div>
+            </div>
+          </li>
+          <li class="skill-item">
+            <img class="skill-icon" src="./skill-icon-2.png" alt="" aria-hidden="true">
+            <div class="skill-card">
+              <div class="skill-summary">Тексты для сайта</div>
+              <div class="skill-content">Пишу тексты для основных блоков: о специалисте, услугах, преимуществах и контактах.<br><strong>Результат:</strong> живой и структурный сайт без лишней воды.</div>
+            </div>
+          </li>
+          <li class="skill-item">
+            <img class="skill-icon" src="./skill-icon-4.png" alt="" aria-hidden="true">
+            <div class="skill-card">
+              <div class="skill-summary">Прототип сайта</div>
+              <div class="skill-content">Собираю черновую структуру страниц перед дизайном и сборкой.<br><strong>Результат:</strong> понятная логика сайта без хаоса.</div>
+            </div>
+          </li>
+          <li class="skill-item">
+            <img class="skill-icon" src="./skill-icon-7.png" alt="" aria-hidden="true">
+            <div class="skill-card">
+              <div class="skill-summary">Веб-дизайн</div>
+              <div class="skill-content">Продумываю внешний вид сайта: композицию, акценты, блоки и визуальную подачу.<br><strong>Результат:</strong> аккуратный современный сайт под задачу.</div>
+            </div>
+          </li>
+          <li class="skill-item">
+            <img class="skill-icon" src="./skill-icon-6.png" alt="" aria-hidden="true">
+            <div class="skill-card">
+              <div class="skill-summary">Боты и AI-решения</div>
+              <div class="skill-content">Создаю Telegram/VK-ботов и AI-сценарии для общения с клиентами.<br><strong>Результат:</strong> автоматизация заявок, ответов и консультаций.</div>
+            </div>
+          </li>
+          <li class="skill-item">
+            <img class="skill-icon" src="./skill-icon-5.png" alt="" aria-hidden="true">
+            <div class="skill-card">
+              <div class="skill-summary">Интерфейсы и логика</div>
+              <div class="skill-content">Продумываю путь пользователя: что он видит, куда нажимает и как доходит до заявки.<br><strong>Результат:</strong> сайт становится удобным и понятным.</div>
+            </div>
+          </li>
         </ul>
       </article>
     </section>
@@ -483,71 +554,8 @@
 
   <div class="tilted-card-caption" id="tilted-card-caption" aria-hidden="true"></div>
 
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
-
-    if (window.gsap && window.ScrollTrigger) {
-      gsap.registerPlugin(ScrollTrigger);
-
-      const applyScrollFloat = (selector, config = {}) => {
-        const {
-          animationDuration = 1,
-          ease = "back.inOut(2)",
-          scrollStart = "center bottom+=50%",
-          scrollEnd = "bottom bottom-=40%",
-          stagger = 0.03
-        } = config;
-
-        document.querySelectorAll(selector).forEach((el) => {
-          const sourceText = (el.textContent || "").trim();
-          if (!sourceText || el.dataset.scrollFloatReady === "true") return;
-
-          el.dataset.scrollFloatReady = "true";
-          el.classList.add("scroll-float");
-          el.textContent = "";
-
-          const fragment = document.createDocumentFragment();
-          sourceText.split("").forEach((char) => {
-            const span = document.createElement("span");
-            span.className = "char";
-            span.textContent = char === " " ? "\u00A0" : char;
-            fragment.appendChild(span);
-          });
-          el.appendChild(fragment);
-
-          const charElements = el.querySelectorAll(".char");
-          gsap.fromTo(
-            charElements,
-            {
-              opacity: 0,
-              yPercent: 120,
-              scaleY: 2.3,
-              scaleX: 0.7,
-              transformOrigin: "50% 0%"
-            },
-            {
-              duration: animationDuration,
-              ease,
-              opacity: 1,
-              yPercent: 0,
-              scaleY: 1,
-              scaleX: 1,
-              stagger,
-              scrollTrigger: {
-                trigger: el,
-                start: scrollStart,
-                end: scrollEnd,
-                scrub: true
-              }
-            }
-          );
-        });
-      };
-
-      applyScrollFloat("h2", { stagger: 0.03 });
-    }
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const isTouchDevice = window.matchMedia("(hover: none), (pointer: coarse)").matches;
@@ -594,6 +602,7 @@
         entry.addEventListener("mouseleave", onLeave);
       });
     }
+
   </script>
 </body>
 </html>
