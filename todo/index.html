@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PomodoroApp — задачи, фокус и порядок</title>
+  <meta name="description" content="PomodoroApp: задачи, подзадачи, Pomodoro и контроль прогресса. Удобное приложение на каждый день.">
+  <meta property="og:title" content="PomodoroApp — задачи, фокус и порядок в одном приложении">
+  <meta property="og:description" content="Удобное приложение для задач, подзадач, Pomodoro и контроля прогресса на каждый день.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;1,7..72,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="todo-atmosphere" aria-hidden="true"></div>
+
+  <div class="todo-landing">
+    <header class="todo-landing-top">
+      <div class="todo-landing-inner todo-landing-inner--wide">
+        <p class="todo-landing-brand">PomodoroApp</p>
+      </div>
+    </header>
+
+    <main>
+      <section class="todo-section todo-hero" aria-labelledby="hero-title">
+        <div class="todo-landing-inner todo-landing-inner--wide todo-hero-layout">
+          <div class="todo-hero-copy">
+            <p class="todo-hero-eyebrow">Фокус · задачи · прогресс</p>
+            <h1 id="hero-title" class="todo-hero-title">PomodoroApp — задачи, фокус и порядок в одном приложении</h1>
+            <p class="todo-hero-lead">Удобное приложение для задач, подзадач, Pomodoro и контроля прогресса на каждый день.</p>
+            <a class="todo-btn" href="PomodoroApp-debug.apk" download="PomodoroApp-debug.apk">Скачать приложение</a>
+          </div>
+          <div class="todo-hero-ring-wrap" aria-hidden="true">
+            <div class="todo-hero-ring"></div>
+            <span class="todo-hero-ring-label">25′</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="todo-section todo-section-pop" aria-labelledby="about-title">
+        <div class="todo-landing-inner">
+          <h2 id="about-title" class="todo-section-title">Всё нужное для продуктивной работы</h2>
+          <div class="todo-prose">
+            <p>PomodoroApp помогает планировать день, разбивать дела на подзадачи, запускать Pomodoro для конкретной задачи и видеть свой прогресс.</p>
+            <p>Приложение сделано просто и понятно: без лишнего шума, с удобной логикой работы и акцентом на фокус.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="todo-section todo-gallery" aria-labelledby="gallery-title">
+        <div class="todo-landing-inner todo-landing-inner--wide">
+          <h2 id="gallery-title" class="todo-section-title">Интерфейс приложения</h2>
+          <p class="todo-gallery-intro">Экраны PomodoroApp: задачи по дням и общий список, таймер Pomodoro, статистика и настройки внешнего вида — в светлой и тёмной темах, с разными акцентными цветами.</p>
+          <div class="todo-gallery-grid">
+            <figure class="todo-gallery-item">
+              <div class="todo-gallery-frame">
+                <img src="screenshots/tasks-day-green.png" alt="Список задач на день с подзадачами, датой и прогресс-барами, зелёный акцент" loading="lazy" decoding="async">
+              </div>
+              <figcaption>Задачи на день · зелёный акцент</figcaption>
+            </figure>
+            <figure class="todo-gallery-item">
+              <div class="todo-gallery-frame">
+                <img src="screenshots/settings-light.png" alt="Настройки внешнего вида: тема, цвет акцента, размер шрифта" loading="lazy" decoding="async">
+              </div>
+              <figcaption>Настройки · светлая тема</figcaption>
+            </figure>
+            <figure class="todo-gallery-item">
+              <div class="todo-gallery-frame">
+                <img src="screenshots/pomodoro-light.png" alt="Экран Pomodoro: таймер с кольцом прогресса, задача и режим фокуса" loading="lazy" decoding="async">
+              </div>
+              <figcaption>Pomodoro · светлая тема</figcaption>
+            </figure>
+            <figure class="todo-gallery-item">
+              <div class="todo-gallery-frame">
+                <img src="screenshots/stats-light.png" alt="Статистика: завершённые Pomodoro, время фокуса, задачи и подзадачи" loading="lazy" decoding="async">
+              </div>
+              <figcaption>Статистика · светлая тема</figcaption>
+            </figure>
+            <figure class="todo-gallery-item">
+              <div class="todo-gallery-frame">
+                <img src="screenshots/tasks-day-orange.png" alt="Задачи на день в тёмной теме с оранжевым акцентом" loading="lazy" decoding="async">
+              </div>
+              <figcaption>Задачи на день · оранжевый акцент</figcaption>
+            </figure>
+            <figure class="todo-gallery-item">
+              <div class="todo-gallery-frame">
+                <img src="screenshots/all-tasks-orange.png" alt="Общий список всех задач с датами и подзадачами" loading="lazy" decoding="async">
+              </div>
+              <figcaption>Все задачи</figcaption>
+            </figure>
+            <figure class="todo-gallery-item">
+              <div class="todo-gallery-frame">
+                <img src="screenshots/pomodoro-dark.png" alt="Таймер Pomodoro в тёмной теме с оранжевым кольцом" loading="lazy" decoding="async">
+              </div>
+              <figcaption>Pomodoro · тёмная тема</figcaption>
+            </figure>
+            <figure class="todo-gallery-item">
+              <div class="todo-gallery-frame">
+                <img src="screenshots/stats-dark.png" alt="Статистика в тёмной теме: Pomodoro, фокус, задачи" loading="lazy" decoding="async">
+              </div>
+              <figcaption>Статистика · тёмная тема</figcaption>
+            </figure>
+            <figure class="todo-gallery-item">
+              <div class="todo-gallery-frame">
+                <img src="screenshots/settings-dark.png" alt="Настройки интерфейса в тёмной теме с оранжевым акцентом" loading="lazy" decoding="async">
+              </div>
+              <figcaption>Настройки · тёмная тема</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="todo-section todo-section--alt" aria-labelledby="features-title">
+        <div class="todo-landing-inner">
+          <h2 id="features-title" class="todo-section-title">Основные возможности</h2>
+          <ul class="todo-feature-list">
+            <li>задачи и подзадачи</li>
+            <li>экран задач по дням</li>
+            <li>общий список всех задач</li>
+            <li>Pomodoro-таймер</li>
+            <li>статистика</li>
+            <li>drag-and-drop</li>
+            <li>скрытие выполненных задач</li>
+            <li>настройки интерфейса</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="todo-section" aria-labelledby="how-title">
+        <div class="todo-landing-inner">
+          <h2 id="how-title" class="todo-section-title">Просто в использовании</h2>
+          <p class="todo-steps-flow">Добавь задачи → распредели по дням → запусти Pomodoro → отмечай выполненное и смотри статистику</p>
+        </div>
+      </section>
+
+      <section id="download" class="todo-section todo-cta" aria-labelledby="cta-title">
+        <div class="todo-landing-inner">
+          <div class="todo-cta-panel">
+            <h2 id="cta-title" class="todo-cta-title">Начни работать спокойнее и продуктивнее</h2>
+            <p class="todo-cta-lead">Скачай PomodoroApp и собери задачи, фокус и прогресс в одном месте.</p>
+            <a class="todo-btn todo-btn--large" href="PomodoroApp-debug.apk" download="PomodoroApp-debug.apk">Скачать приложение</a>
+            <p class="todo-download-meta">Android · отладочная сборка · файл <code>PomodoroApp-debug.apk</code></p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="todo-footer">
+      <div class="todo-landing-inner">
+        <p class="todo-footer-note">PomodoroApp — задачи, фокус и порядок в одном приложении.</p>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

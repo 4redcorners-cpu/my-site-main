@@ -1,0 +1,513 @@
+/*
+ * PomodoroApp — автономный лендинг
+ * Палитра как в приложении: тёмный фон + оранжевый акцент (и зелёный как вторичный на акцентах).
+ */
+
+:root {
+  --bg-deep: #121212;
+  --bg-elevated: #1a1a1a;
+  --bg-card: #252525;
+  --text: #f5f5f5;
+  --muted: #a8a8a8;
+  --border: rgba(255, 255, 255, 0.1);
+  /* Оранжевый акцент — как FAB, прогресс и навигация на скриншотах */
+  --accent: #ff9f1c;
+  --accent-deep: #e8890b;
+  --accent-glow: rgba(255, 159, 28, 0.4);
+  /* Зелёный — вторая тема акцента в приложении */
+  --accent-green: #4cd964;
+  --cream: #ffffff;
+  --font-display: "Bricolage Grotesque", system-ui, sans-serif;
+  --font-body: "Literata", "Georgia", serif;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg-deep: #f4f0fa;
+    --bg-elevated: #ebe4f5;
+    --bg-card: #ffffff;
+    --text: #1c1c1e;
+    --muted: #636366;
+    --border: rgba(28, 28, 30, 0.12);
+    --accent: #e8830a;
+    --accent-deep: #c96f00;
+    --accent-glow: rgba(232, 131, 10, 0.28);
+    --accent-green: #34c759;
+    --cream: #ffffff;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--text);
+  background: var(--bg-deep);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Атмосфера: свечение + зернистость */
+.todo-atmosphere {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 55% at 85% 12%, var(--accent-glow), transparent 55%),
+    radial-gradient(ellipse 60% 40% at 10% 80%, rgba(255, 159, 28, 0.07), transparent 50%),
+    var(--bg-deep);
+}
+
+.todo-atmosphere::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+.todo-landing {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.todo-landing-inner {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 1.35rem;
+}
+
+.todo-landing-inner--wide {
+  max-width: 960px;
+}
+
+.todo-landing-top {
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg-deep) 82%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.todo-landing-brand {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: -0.03em;
+  color: var(--text);
+}
+
+.todo-section {
+  padding: clamp(2.75rem, 6vw, 4rem) 0;
+  animation: todo-rise 0.85s var(--ease-out) backwards;
+}
+
+.todo-section:nth-child(1) {
+  animation-delay: 0.04s;
+}
+
+.todo-section:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.todo-section:nth-child(3) {
+  animation-delay: 0.16s;
+}
+
+.todo-section:nth-child(4) {
+  animation-delay: 0.22s;
+}
+
+.todo-section:nth-child(5) {
+  animation-delay: 0.28s;
+}
+
+.todo-section:nth-child(6) {
+  animation-delay: 0.34s;
+}
+
+@keyframes todo-rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.todo-section--alt {
+  background: color-mix(in srgb, var(--bg-elevated) 94%, transparent);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.todo-section-title {
+  margin: 0 0 1.35rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.35rem, 3.2vw, 1.75rem);
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+}
+
+/* Галерея скриншотов */
+.todo-gallery-intro {
+  margin: -0.35rem 0 1.75rem;
+  color: var(--muted);
+  font-size: 1.02rem;
+  max-width: 42rem;
+}
+
+.todo-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+  gap: 1.35rem 1.15rem;
+}
+
+@media (min-width: 700px) {
+  .todo-gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.todo-gallery-item {
+  margin: 0;
+}
+
+.todo-gallery-frame {
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  box-shadow:
+    0 20px 40px -22px rgba(0, 0, 0, 0.55),
+    0 0 0 1px color-mix(in srgb, var(--text) 6%, transparent);
+}
+
+.todo-gallery-frame img {
+  width: 100%;
+  height: auto;
+  display: block;
+  vertical-align: middle;
+}
+
+.todo-gallery-item figcaption {
+  margin-top: 0.55rem;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+/* Hero */
+.todo-hero {
+  padding: clamp(2rem, 5vw, 3.5rem) 0 clamp(3rem, 8vw, 5rem);
+}
+
+.todo-hero-layout {
+  display: grid;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+@media (min-width: 820px) {
+  .todo-hero-layout {
+    grid-template-columns: 1fr minmax(200px, 260px);
+    gap: 3rem;
+  }
+}
+
+.todo-hero-eyebrow {
+  margin: 0 0 0.85rem;
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.todo-hero-title {
+  margin: 0 0 1.1rem;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.65rem, 4.5vw, 2.65rem);
+  line-height: 1.12;
+  letter-spacing: -0.045em;
+}
+
+.todo-hero-lead {
+  margin: 0 0 1.85rem;
+  color: var(--muted);
+  font-size: clamp(1.05rem, 2vw, 1.18rem);
+  max-width: 38rem;
+}
+
+/* Декоративное кольцо Pomodoro */
+.todo-hero-ring-wrap {
+  position: relative;
+  justify-self: center;
+  width: min(220px, 70vw);
+  aspect-ratio: 1;
+}
+
+.todo-hero-ring {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: conic-gradient(
+    from -90deg,
+    var(--accent) 0deg,
+    var(--accent) 252deg,
+    color-mix(in srgb, var(--bg-card) 88%, var(--border)) 252deg,
+    color-mix(in srgb, var(--bg-card) 88%, var(--border)) 360deg
+  );
+  box-shadow:
+    inset 0 0 0 3px var(--bg-deep),
+    0 24px 48px -12px rgba(0, 0, 0, 0.45),
+    0 0 0 1px var(--border);
+}
+
+.todo-hero-ring-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  letter-spacing: -0.06em;
+  color: var(--cream);
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+}
+
+@media (prefers-color-scheme: light) {
+  .todo-hero-ring-label {
+    color: var(--text);
+    text-shadow: none;
+  }
+}
+
+.todo-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.78rem 1.5rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.98rem;
+  text-decoration: none;
+  color: var(--cream);
+  background: linear-gradient(165deg, var(--accent), var(--accent-deep));
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--cream) 18%, transparent);
+  box-shadow:
+    0 4px 20px var(--accent-glow),
+    inset 0 1px 0 color-mix(in srgb, var(--cream) 22%, transparent);
+  transition:
+    transform 0.2s var(--ease-out),
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+}
+
+.todo-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.06);
+  box-shadow:
+    0 8px 32px var(--accent-glow),
+    inset 0 1px 0 color-mix(in srgb, var(--cream) 28%, transparent);
+}
+
+.todo-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.todo-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.todo-btn--large {
+  padding: 0.92rem 1.85rem;
+  font-size: 1.05rem;
+}
+
+/* About */
+.todo-section-pop .todo-prose p:first-child::first-letter {
+  font-size: 2.75rem;
+  font-weight: 600;
+  float: left;
+  line-height: 0.85;
+  margin-right: 0.45rem;
+  font-family: var(--font-display);
+  color: var(--accent);
+}
+
+.todo-prose p {
+  margin: 0 0 1.15rem;
+  color: var(--muted);
+}
+
+.todo-prose p:last-child {
+  margin-bottom: 0;
+}
+
+/* Features */
+.todo-feature-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.75rem;
+}
+
+@media (min-width: 540px) {
+  .todo-feature-list {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.85rem 1.25rem;
+  }
+}
+
+.todo-feature-list li {
+  padding: 0.85rem 1rem 0.85rem 1rem;
+  border-left: 3px solid var(--accent);
+  background: color-mix(in srgb, var(--bg-card) 65%, transparent);
+  border-radius: 0 12px 12px 0;
+  color: var(--text);
+  font-size: 0.98rem;
+  line-height: 1.45;
+  border-top: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  transition: transform 0.2s var(--ease-out), border-color 0.2s ease;
+}
+
+.todo-feature-list li:hover {
+  transform: translateX(4px);
+  border-top-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+  border-right-color: color-mix(in srgb, var(--accent) 25%, var(--border));
+  border-bottom-color: color-mix(in srgb, var(--accent) 25%, var(--border));
+}
+
+/* How */
+.todo-steps-flow {
+  margin: 0;
+  padding: 1.15rem 1.25rem;
+  font-size: clamp(0.98rem, 2.2vw, 1.08rem);
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.7;
+  color: var(--text);
+  border-radius: 14px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 55%, var(--border));
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+}
+
+/* CTA */
+.todo-cta {
+  padding: clamp(3rem, 9vw, 5rem) 0;
+}
+
+.todo-cta .todo-landing-inner {
+  max-width: 580px;
+}
+
+.todo-cta-panel {
+  padding: clamp(2rem, 5vw, 2.75rem);
+  text-align: center;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: linear-gradient(
+    165deg,
+    color-mix(in srgb, var(--bg-card) 92%, var(--accent)),
+    var(--bg-elevated)
+  );
+  box-shadow: 0 28px 60px -24px rgba(0, 0, 0, 0.55);
+}
+
+.todo-cta-title {
+  margin: 0 0 0.9rem;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.45rem, 3.8vw, 1.95rem);
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+}
+
+.todo-cta-lead {
+  margin: 0 0 1.75rem;
+  color: var(--muted);
+  font-size: 1.06rem;
+}
+
+.todo-download-meta {
+  margin: 1rem 0 0;
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.todo-download-meta code {
+  font-size: 0.92em;
+  padding: 0.12rem 0.35rem;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--bg-deep) 65%, var(--border));
+}
+
+/* Footer */
+.todo-footer {
+  margin-top: auto;
+  padding: 1.75rem 0 2.25rem;
+  border-top: 1px solid var(--border);
+}
+
+.todo-footer-note {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--muted);
+  text-align: center;
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .todo-section {
+    animation: none;
+  }
+
+  .todo-btn:hover {
+    transform: none;
+  }
+
+  .todo-feature-list li:hover {
+    transform: none;
+  }
+}

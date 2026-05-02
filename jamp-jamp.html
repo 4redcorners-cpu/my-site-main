@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Попрыгунчик — Портфолио</title>
+  <meta name="description" content="Проект аркадной мини-игры «Попрыгунчик»: концепт, визуал и интерактивная демонстрация.">
+  <meta property="og:title" content="Попрыгунчик — Портфолио">
+  <meta property="og:description" content="Проект аркадной мини-игры «Попрыгунчик»: концепт, визуал и интерактивная демонстрация.">
+  <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Unbounded:wght@500;700;800&display=swap" rel="stylesheet">
@@ -91,6 +95,7 @@
       }
     }
   </style>
+  <script src="theme-boot.js"></script>
 </head>
 <body>
   <header class="site-header" id="top">
@@ -151,7 +156,7 @@
     <div class="container footer-grid">
       <div>
         <a class="brand" href="index.html">Евгений Ворошилов</a>
-        <p class="footer-note">Сайты, digital-упаковка и AI-решения для экспертов и малого бизнеса.</p>
+        <p class="footer-note">Сайты, digital-упаковка и ИИ-решения для экспертов и малого бизнеса.</p>
       </div>
       <div class="footer-copy">© <span id="year"></span> Евгений Ворошилов. Все права защищены.</div>
     </div>
@@ -172,7 +177,7 @@
 
     function updateFullscreenLabel() {
       const isFullscreen = document.fullscreenElement === gameContainer;
-      fullscreenToggle.textContent = isFullscreen ? "Выйти из полноэкраного режима" : "На весь экран";
+      fullscreenToggle.textContent = isFullscreen ? "Выйти из полноэкранного режима" : "На весь экран";
       if (isFullscreen) {
         setTimeout(focusGameFrame, 50);
       }

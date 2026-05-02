@@ -576,7 +576,11 @@ class Game {
   }
 
   #saveLeaderboard() {
-    localStorage.setItem(LEADERBOARD_KEY, JSON.stringify(this.leaderboard));
+    try {
+      localStorage.setItem(LEADERBOARD_KEY, JSON.stringify(this.leaderboard));
+    } catch (_error) {
+      /* Quota, приватный режим и др. — не ломаем игру */
+    }
   }
 
   #medalLabel(rank) {
@@ -585,7 +589,7 @@ class Game {
 
   #renderLeaderboard() {
     if (!this.leaderboardListEl) return;
-    this.leaderboardListEl.innerHTML = "";
+    this.leaderboardListEl.replaceChildren();
     if (this.leaderboard.length === 0) {
       const empty = document.createElement("li");
       empty.textContent = "Пока нет результатов";
@@ -596,11 +600,15 @@ class Game {
       const rank = index + 1;
       const li = document.createElement("li");
       if (rank <= 3) li.classList.add(`top-${rank}`);
-      li.innerHTML = `
-        <span class="lb-rank">${this.#medalLabel(rank)}</span>
-        <span>${item.name}</span>
-        <span class="lb-score">${item.score}</span>
-      `;
+      const rankSpan = document.createElement("span");
+      rankSpan.className = "lb-rank";
+      rankSpan.textContent = this.#medalLabel(rank);
+      const nameSpan = document.createElement("span");
+      nameSpan.textContent = item.name;
+      const scoreSpan = document.createElement("span");
+      scoreSpan.className = "lb-score";
+      scoreSpan.textContent = String(item.score);
+      li.append(rankSpan, nameSpan, scoreSpan);
       this.leaderboardListEl.append(li);
     });
   }
@@ -958,25 +966,32 @@ class Game {
 
 const canvas = document.getElementById("game");
 const input = new Input();
-const game = new Game(canvas, input);
+const game = canvas ? new Game(canvas, input) : null;
 
+/**
+ * Только Pointer Events — без дублирования touch и mouse (меньше конфликтов и «залипаний»).
+ * Старые браузеры без PointerEvent: клавиатура всё ещё работает.
+ */
 function bindMobileControls(inputRef) {
   const leftBtn = document.getElementById("mcLeft");
   const rightBtn = document.getElementById("mcRight");
   const jumpBtn = document.getElementById("mcJump");
   if (!leftBtn || !rightBtn || !jumpBtn) return;
+  if (!window.PointerEvent) return;
 
   const bindHold = (btn, setState) => {
     const release = () => {
       setState(false);
       btn.classList.remove("active");
     };
-    btn.addEventListener("pointerdown", (e) => {
+    const press = (e) => {
+      if (e.button !== undefined && e.button !== 0) return;
       e.preventDefault();
       setState(true);
       btn.classList.add("active");
-      btn.setPointerCapture?.(e.pointerId);
-    });
+      if (typeof e.pointerId === "number") btn.setPointerCapture?.(e.pointerId);
+    };
+    btn.addEventListener("pointerdown", press);
     btn.addEventListener("pointerup", release);
     btn.addEventListener("pointercancel", release);
     btn.addEventListener("pointerleave", release);
@@ -986,16 +1001,18 @@ function bindMobileControls(inputRef) {
   bindHold(leftBtn, (pressed) => inputRef.setLeft(pressed));
   bindHold(rightBtn, (pressed) => inputRef.setRight(pressed));
 
-  jumpBtn.addEventListener("pointerdown", (e) => {
+  const jumpPress = (e) => {
+    if (e.button !== undefined && e.button !== 0) return;
     e.preventDefault();
     inputRef.queueJump();
     jumpBtn.classList.add("active");
-  });
+  };
   const clearJumpActive = () => jumpBtn.classList.remove("active");
+  jumpBtn.addEventListener("pointerdown", jumpPress);
   jumpBtn.addEventListener("pointerup", clearJumpActive);
   jumpBtn.addEventListener("pointercancel", clearJumpActive);
   jumpBtn.addEventListener("pointerleave", clearJumpActive);
 }
 
 bindMobileControls(input);
-game.start();
+if (game) game.start();

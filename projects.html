@@ -4,7 +4,75 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Проекты</title>
+  <meta name="description" content="Подборка выполненных проектов: сайты, интерфейсы и digital-решения с акцентом на понятную подачу и результат.">
+  <meta property="og:title" content="Проекты">
+  <meta property="og:description" content="Подборка выполненных проектов: сайты, интерфейсы и digital-решения с акцентом на понятную подачу и результат.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Unbounded:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="theme-boot.js"></script>
 </head>
 <body>
+  <header class="site-header" id="top">
+    <div class="container nav-wrap">
+      <a class="brand" href="index.html">Евгений Ворошилов</a>
+      <nav class="site-nav" id="site-nav" aria-label="Основная навигация">
+        <a href="index.html">Обо мне</a>
+        <a href="services.html">Услуги</a>
+        <a href="works.html">Портфолио</a>
+        <a href="cost.html">Стоимость</a>
+        <a href="contacts.html">Контакты</a>
+      </nav>
+      <div class="header-actions">
+        <button class="settings-toggle" type="button" aria-expanded="false" aria-controls="settings-panel" aria-label="Настройки темы и цвета">⚙</button>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Меню</button>
+      </div>
+    </div>
+    <aside class="settings-panel" id="settings-panel" aria-label="Настройки сайта" hidden>
+      <p class="settings-title">Настройки</p>
+      <div class="settings-group">
+        <p class="settings-label">Тема</p>
+        <div class="settings-options">
+          <button class="option-btn" type="button" data-theme-option="light">Светлая</button>
+          <button class="option-btn" type="button" data-theme-option="dark">Тёмная</button>
+        </div>
+      </div>
+      <div class="settings-group">
+        <p class="settings-label">Основной цвет</p>
+        <div class="settings-options settings-colors">
+          <button class="color-btn" type="button" data-accent-option="orange" aria-label="Оранжевый"></button>
+          <button class="color-btn" type="button" data-accent-option="blue" aria-label="Синий"></button>
+          <button class="color-btn" type="button" data-accent-option="purple" aria-label="Фиолетовый"></button>
+          <button class="color-btn" type="button" data-accent-option="neon" aria-label="Неоновый"></button>
+          <button class="color-btn" type="button" data-accent-option="dark-yellow" aria-label="Тёмно-жёлтый"></button>
+          <button class="color-btn" type="button" data-accent-option="graphite" aria-label="Белый"></button>
+        </div>
+      </div>
+    </aside>
+  </header>
+
+  <main class="section">
+    <div class="container">
+      <h1>Проекты</h1>
+      <p class="section-intro">Эта страница зарезервирована под расширенную подборку кейсов. Сейчас основное портфолио находится в отдельном разделе.</p>
+      <div class="center-action">
+        <a class="btn btn-invert" href="works.html">Перейти в портфолио</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <a class="brand" href="index.html">Евгений Ворошилов</a>
+        <p class="footer-note">Сайты, digital-упаковка и ИИ-решения для экспертов и малого бизнеса.</p>
+      </div>
+      <div class="footer-copy">© <span id="year"></span> Евгений Ворошилов. Все права защищены.</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
