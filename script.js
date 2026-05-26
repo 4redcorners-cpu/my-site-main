@@ -141,3 +141,26 @@ accentButtons.forEach((button) => {
     setAccent(button.dataset.accentOption);
   });
 });
+
+/* Аурора: не крутить keyframes, пока секция не в зоне видимости — меньше нагрузка на GPU */
+(function initAuroraVisibilityPause() {
+  const sections = document.querySelectorAll(
+    "section#about.section-light-pillar, section#directions.section-light-pillar, section#process.section-light-pillar",
+  );
+  if (!sections.length || typeof IntersectionObserver === "undefined") return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        entry.target.classList.toggle("section-light-pillar--aurora-off", !entry.isIntersecting);
+      });
+    },
+    { rootMargin: "100px 0px", threshold: 0 },
+  );
+
+  sections.forEach((el) => {
+    el.classList.add("section-light-pillar--aurora-off");
+    observer.observe(el);
+  });
+})();
