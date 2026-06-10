@@ -64,10 +64,14 @@ function applyPreferences(theme, accent) {
   setStoredValue(THEME_KEY, t);
   setStoredValue(ACCENT_KEY, a);
   themeButtons.forEach((button) => {
-    button.classList.toggle("is-active", button.dataset.themeOption === t);
+    const isActive = button.dataset.themeOption === t;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
   });
   accentButtons.forEach((button) => {
-    button.classList.toggle("is-active", button.dataset.accentOption === a);
+    const isActive = button.dataset.accentOption === a;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
   });
 }
 
@@ -87,10 +91,18 @@ const savedTheme = normalizeTheme(getStoredValue(THEME_KEY) || defaultTheme);
 const savedAccent = normalizeAccent(getStoredValue(ACCENT_KEY));
 applyPreferences(savedTheme, savedAccent);
 
-const currentPage = window.location.pathname.split("/").pop() || "index.html";
+function normalizePath(pathname) {
+  return pathname.replace(/\/index\.html$/, "").replace(/\/$/, "") || "/";
+}
+
+const currentPath = normalizePath(window.location.pathname);
 navLinks.forEach((link) => {
-  const linkPage = link.getAttribute("href");
-  if (linkPage === currentPage) {
+  const linkUrl = new URL(link.getAttribute("href"), window.location.href);
+  const linkPath = normalizePath(linkUrl.pathname);
+  const linkPage = linkUrl.pathname.split("/").pop() || "index.html";
+  const isCurrentPage = linkPath === currentPath;
+  const isLandingServicePage = document.body.classList.contains("landing-page") && linkPage === "services.html";
+  if (isCurrentPage || isLandingServicePage) {
     link.classList.add("is-active");
     link.setAttribute("aria-current", "page");
   }
@@ -130,6 +142,21 @@ if (settingsToggle && settingsPanel) {
   });
 }
 
+document.addEventListener("keydown", (event) => {
+  if (event.key !== "Escape") return;
+
+  if (menuButton && nav && nav.classList.contains("is-open")) {
+    menuButton.setAttribute("aria-expanded", "false");
+    nav.classList.remove("is-open");
+  }
+
+  if (settingsToggle && settingsPanel && !settingsPanel.hidden) {
+    settingsPanel.hidden = true;
+    settingsToggle.setAttribute("aria-expanded", "false");
+    settingsToggle.focus();
+  }
+});
+
 themeButtons.forEach((button) => {
   button.addEventListener("click", () => {
     setTheme(button.dataset.themeOption);
@@ -147,8 +174,10 @@ accentButtons.forEach((button) => {
   const sections = document.querySelectorAll(
     "section#about.section-light-pillar, section#directions.section-light-pillar, section#process.section-light-pillar",
   );
-  if (!sections.length || typeof IntersectionObserver === "undefined") return;
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const ioOk = typeof IntersectionObserver !== "undefined";
+  if (!sections.length || !ioOk) return;
+  if (reduced) return;
 
   const observer = new IntersectionObserver(
     (entries) => {

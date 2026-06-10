@@ -1,0 +1,16 @@
+node_modules/
+
+# Local tooling and logs
+.DS_Store
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build output
+dist/
+build/
+
+# Heavy local Android artifacts
+*.apk
+*.aab

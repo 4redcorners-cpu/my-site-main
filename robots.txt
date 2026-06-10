@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /test/
+Disallow: /admin.html
+Disallow: /test-calc.html
+
+Sitemap: https://4redcorners-cpu.github.io/my-site-main/sitemap.xml
