@@ -97,6 +97,7 @@
       </div>
     </section>
   `;
+  if (window.upgradeSiteIcons) window.upgradeSiteIcons(root);
 })();
 
 function renderTextCard(icon, title, paragraphs) {

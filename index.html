@@ -15,27 +15,11 @@
   <link rel="preload" as="image" href="assets/profile-photo.png" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Unbounded:wght@500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Unbounded:wght@500;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script src="theme-boot.js"></script>
 </head>
-<body class="home-page">
-  <svg class="icon-sprite" aria-hidden="true" focusable="false">
-    <symbol id="icon-spark" viewBox="0 0 24 24"><path d="M12 3l1.4 5.2L18 10l-4.6 1.8L12 17l-1.4-5.2L6 10l4.6-1.8L12 3z"/><path d="M5 16l.7 2.3L8 19l-2.3.7L5 22l-.7-2.3L2 19l2.3-.7L5 16z"/></symbol>
-    <symbol id="icon-layout" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M4 10h16M10 10v9"/></symbol>
-    <symbol id="icon-shop" viewBox="0 0 24 24"><path d="M5 10h14l-1 10H6L5 10z"/><path d="M8 10a4 4 0 0 1 8 0"/></symbol>
-    <symbol id="icon-phone" viewBox="0 0 24 24"><rect x="8" y="3" width="8" height="18" rx="2"/><path d="M11 18h2"/></symbol>
-    <symbol id="icon-layers" viewBox="0 0 24 24"><path d="M12 4l8 4-8 4-8-4 8-4z"/><path d="M4 12l8 4 8-4M4 16l8 4 8-4"/></symbol>
-    <symbol id="icon-bot" viewBox="0 0 24 24"><rect x="5" y="8" width="14" height="10" rx="3"/><path d="M12 8V5M9 12h.01M15 12h.01M9 16h6"/></symbol>
-    <symbol id="icon-pen" viewBox="0 0 24 24"><path d="M4 20l4.4-1 10-10a2.1 2.1 0 0 0-3-3l-10 10L4 20z"/><path d="M13.5 7.5l3 3"/></symbol>
-    <symbol id="icon-brush" viewBox="0 0 24 24"><path d="M14 4l6 6-7 7H7v-6l7-7z"/><path d="M7 17c0 2-1.5 3-4 3 1.2-1.1 1.4-2.3 1.4-3.2"/></symbol>
-    <symbol id="icon-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M5 20c1.2-4 12.8-4 14 0"/></symbol>
-    <symbol id="icon-briefcase" viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="12" rx="2"/><path d="M9 7V5h6v2M4 12h16"/></symbol>
-    <symbol id="icon-hand" viewBox="0 0 24 24"><path d="M7 12V6a1.5 1.5 0 0 1 3 0v5"/><path d="M10 11V5a1.5 1.5 0 0 1 3 0v6"/><path d="M13 11V7a1.5 1.5 0 0 1 3 0v6"/><path d="M16 13l1.2-2a1.5 1.5 0 0 1 2.6 1.5L17 18a5 5 0 0 1-4.4 2.5H10a5 5 0 0 1-5-5V12a1.5 1.5 0 0 1 3 0v2"/></symbol>
-    <symbol id="icon-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 4v3M12 17v3M4 12h3M17 12h3"/></symbol>
-    <symbol id="icon-check" viewBox="0 0 24 24"><path d="M5 12l4 4L19 6"/></symbol>
-    <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></symbol>
-  </svg>
+<body class="home-page home-page--journal">
   <header class="site-header" id="top">
     <div class="container nav-wrap">
       <a class="brand" href="index.html">Евгений Ворошилов</a>
@@ -74,108 +58,183 @@
     </aside>
   </header>
 
-  <main>
-    <section class="hero section">
-      <div class="container hero-grid">
-        <div class="hero-content">
+  <main class="journal">
+    <section class="journal-cover section" id="cover">
+      <div class="container journal-cover__grid">
+        <div class="journal-cover__copy">
           <h1>Создаю решения для привлечения клиентов и экономии времени</h1>
-          <p class="lead">Меня зовут Евгений Ворошилов. Я специалист по нейросетям и вайб-кодингу. Помогаю специалистам, предпринимателям, ремесленникам и бизнесу переходить от идеи к понятному рабочему решению.</p>
-          <p>Создаю сайты, лендинги, прототипы, Android-приложения, ИИ-помощников и продающие тексты. Продумываю структуру, маркетинговую логику, визуальную подачу и путь клиента к заявке.</p>
-          <div class="hero-points" aria-label="Ключевые направления">
-            <span><svg class="icon"><use href="#icon-layout"></use></svg>Сайты</span>
-            <span><svg class="icon"><use href="#icon-shop"></use></svg>Магазины</span>
-            <span><svg class="icon"><use href="#icon-phone"></use></svg>Android</span>
-            <span><svg class="icon"><use href="#icon-bot"></use></svg>ИИ-помощники</span>
-          </div>
+          <p class="journal-lead">Меня зовут Евгений Ворошилов. Помогаю специалистам, предпринимателям, ремесленникам и бизнесу переходить от идеи к понятному рабочему решению — с ясной структурой, текстом и визуальной подачей.</p>
+          <nav class="journal-toc" aria-label="Содержание">
+            <a href="#about">Об авторе</a>
+            <a href="#solutions">Задачи</a>
+            <a href="#rubrics">Рубрики</a>
+            <a href="#process">Процесс</a>
+            <a href="#contact">Контакты</a>
+          </nav>
           <div class="cta-row">
             <a class="btn btn-primary" href="contacts.html">Обсудить проект</a>
+            <a class="btn btn-secondary" href="services.html">Все услуги</a>
           </div>
         </div>
-        <div class="hero-visual">
-          <div class="portrait-card">
-            <img class="portrait-image" src="assets/profile-photo.png" alt="Евгений Ворошилов" width="2010" height="2560" fetchpriority="high" decoding="async">
-            <div class="portrait-overlay"></div>
-            <div class="portrait-ring"></div>
-            <div class="portrait-content">
-              <span class="portrait-name">Евгений Ворошилов</span>
-              <span class="portrait-role">Нейросети • Вайб-кодинг • Web Design</span>
-            </div>
-          </div>
-        </div>
+        <figure class="journal-cover__figure">
+          <img src="assets/profile-photo.png" alt="Евгений Ворошилов" width="2010" height="2560" fetchpriority="high" decoding="async">
+          <figcaption>
+            <span class="journal-cover__name">Евгений Ворошилов</span>
+            <span class="journal-cover__role">Нейросети · Вайб-кодинг · Web Design</span>
+          </figcaption>
+        </figure>
       </div>
     </section>
 
-    <section class="section" id="about">
-      <div class="container about-text-block">
-        <div class="section-heading">
+    <section class="journal-article section" id="about">
+      <div class="container journal-article__grid">
+        <header class="journal-article__header">
           <h2>Кто я такой?</h2>
-        </div>
-        <div class="text-block">
-          <p>Я работаю на стыке искусственного интеллекта, веб-дизайна, вайб-кодинга, маркетинга и текстов. Для меня важно, чтобы проект выглядел понятно, объяснял ценность и помогал человеку сделать следующий шаг.</p>
+        </header>
+        <div class="journal-prose">
+          <p class="journal-dropcap">Я работаю на стыке искусственного интеллекта, веб-дизайна, вайб-кодинга, маркетинга и текстов. Для меня важно, чтобы проект выглядел понятно, объяснял ценность и помогал человеку сделать следующий шаг.</p>
           <p>Вайб-кодинг — моё основное направление сейчас. Я использую нейросети, чтобы быстрее собирать сайты, лендинги, прототипы и Android-приложения. Такой подход помогает быстро проверить идею, собрать первую версию продукта и довести её до рабочего состояния.</p>
-          <p>Искусственный интеллект для меня — практический инструмент. С его помощью можно упростить рутину, ускорить обработку обращений, подготовку текстов, поиск информации, ответы на вопросы и коммуникацию с клиентами.</p>
+          <blockquote class="journal-pullquote">
+            <p>Искусственный интеллект для меня — практический инструмент, а не модное слово.</p>
+          </blockquote>
+          <p>С его помощью можно упростить рутину, ускорить обработку обращений, подготовку текстов, поиск информации, ответы на вопросы и коммуникацию с клиентами.</p>
+          <a class="journal-inline-link" href="contacts.html">Связаться со мной →</a>
         </div>
-        <div class="about-action">
-          <a class="btn btn-invert" href="contacts.html">Связаться со мной</a>
-        </div>
+        <figure class="journal-media journal-media--portrait">
+          <img src="assets/services/vibe-coding.png" alt="Иллюстрация к направлению вайб-кодинг" width="1024" height="1024" loading="lazy" decoding="async">
+          <figcaption>Вайб-кодинг — быстрый путь от идеи к первой рабочей версии.</figcaption>
+        </figure>
       </div>
     </section>
 
-    <section class="section section-muted" id="solutions">
-      <div class="container">
-        <div class="section-heading">
+    <section class="journal-spread section section-muted" id="solutions">
+      <div class="container journal-spread__grid">
+        <figure class="journal-media journal-media--wide">
+          <img src="assets/services-hero.png" alt="Иллюстрация: сайты, приложения и ИИ-решения" width="1680" height="945" loading="lazy" decoding="async">
+        </figure>
+        <div class="journal-spread__copy">
           <h2>Чем я могу быть полезен?</h2>
-        </div>
-        <div class="text-block">
-          <p>Я разбираю задачу, аудиторию и смысл проекта. Затем собираю структуру, подачу, текст и рабочий формат.</p>
-          <p>В результате появляется сайт, лендинг, интернет-магазин, Android-приложение, прототип или ИИ-помощник, который выглядит аккуратно и понятно объясняет предложение.</p>
-          <p>Решение работает на цель: заявку, покупку, обращение, просмотр портфолио или первый контакт с проектом.</p>
-        </div>
-        <div class="center-action">
+          <div class="journal-prose">
+            <p>Я разбираю задачу, аудиторию и смысл проекта. Затем собираю структуру, подачу, текст и рабочий формат.</p>
+            <p>В результате появляется сайт, лендинг, интернет-магазин, Android-приложение, прототип или ИИ-помощник, который выглядит аккуратно и понятно объясняет предложение.</p>
+            <p>Решение работает на цель: заявку, покупку, обращение, просмотр портфолио или первый контакт с проектом.</p>
+          </div>
           <a class="btn btn-invert" href="contacts.html">Обсудить задачу</a>
         </div>
       </div>
     </section>
 
-    <section class="section" id="directions">
+    <section class="journal-rubrics section" id="rubrics">
       <div class="container">
-        <div class="section-heading section-heading--wide">
-        <h2>Основные направления работы</h2>
-        <p class="section-intro">Каждое направление можно использовать отдельно или собрать в цельное рабочее решение под задачу проекта.</p>
-        </div>
-        <div class="grid cards-7">
-          <a class="service-card" href="services/vibe-coding/index.html"><span class="icon-box"><svg class="icon"><use href="#icon-spark"></use></svg></span><h3>Вайб-кодинг</h3><p>Быстро собираю сайты, прототипы и приложения с помощью нейросетей. Это помогает проверить идею и получить первую рабочую версию без долгой разработки.</p></a>
-          <a class="service-card" href="services/sites/index.html"><span class="icon-box"><svg class="icon"><use href="#icon-layout"></use></svg></span><h3>Сайты и лендинги</h3><p>Создаю страницы, которые объясняют продукт, услугу или экспертность и ведут человека к заявке.</p></a>
-          <a class="service-card" href="services/shop/index.html"><span class="icon-box"><svg class="icon"><use href="#icon-shop"></use></svg></span><h3>Интернет-магазины</h3><p>Собираю витрины для товаров и услуг. Продумываю структуру, карточки, блоки доверия и путь к покупке.</p></a>
-          <a class="service-card" href="services/android/index.html"><span class="icon-box"><svg class="icon"><use href="#icon-phone"></use></svg></span><h3>Android-приложения</h3><p>Создаю простые приложения под задачи бизнеса, продукта или внутреннего процесса.</p></a>
-          <a class="service-card" href="services/ai-assistants/index.html"><span class="icon-box"><svg class="icon"><use href="#icon-bot"></use></svg></span><h3>ИИ-помощники</h3><p>Собираю ИИ-помощников для обращений, ответов, текстов, поиска информации и повторяющихся рабочих задач.</p></a>
-          <a class="service-card" href="services/copywriting/index.html"><span class="icon-box"><svg class="icon"><use href="#icon-pen"></use></svg></span><h3>Продающие тексты</h3><p>Пишу тексты для сайтов, лендингов и презентации услуг. Они объясняют ценность и помогают человеку принять решение.</p></a>
-          <a class="service-card" href="services/web-design/index.html"><span class="icon-box"><svg class="icon"><use href="#icon-brush"></use></svg></span><h3>Веб-дизайн</h3><p>Проектирую внешний вид сайта или интерфейса. Дизайн поддерживает смысл, расставляет акценты и ведёт человека по странице.</p></a>
-          <a class="service-card" href="services/prototypes/index.html"><span class="icon-box"><svg class="icon"><use href="#icon-layers"></use></svg></span><h3>Прототипы и MVP</h3><p>Собираю первую версию идеи, которую можно показать, протестировать и развивать дальше.</p></a>
+        <header class="journal-section-head">
+          <h2>Основные направления работы</h2>
+          <p class="section-intro">Можно выбрать одно направление или собрать несколько в один проект.</p>
+        </header>
+        <div class="journal-rubrics__list">
+          <article class="journal-rubric">
+            <a class="journal-rubric__link" href="services/vibe-coding/index.html">
+              <figure class="journal-rubric__thumb"><img src="assets/services/vibe-coding.png" alt="" loading="lazy" decoding="async"></figure>
+              <div class="journal-rubric__body">
+                <h3>Вайб-кодинг</h3>
+                <p>Быстро собираю сайты, прототипы и приложения с помощью нейросетей — чтобы проверить идею и получить первую рабочую версию.</p>
+                <span class="journal-rubric__more">Подробнее</span>
+              </div>
+            </a>
+          </article>
+          <article class="journal-rubric">
+            <a class="journal-rubric__link" href="services/sites/index.html">
+              <figure class="journal-rubric__thumb"><img src="assets/services/sites.png" alt="" loading="lazy" decoding="async"></figure>
+              <div class="journal-rubric__body">
+                <h3>Сайты и лендинги</h3>
+                <p>Страницы, которые объясняют продукт, услугу или экспертность и ведут человека к заявке.</p>
+                <span class="journal-rubric__more">Подробнее</span>
+              </div>
+            </a>
+          </article>
+          <article class="journal-rubric">
+            <a class="journal-rubric__link" href="services/shop/index.html">
+              <figure class="journal-rubric__thumb"><img src="assets/services/shop.png" alt="" loading="lazy" decoding="async"></figure>
+              <div class="journal-rubric__body">
+                <h3>Интернет-магазины</h3>
+                <p>Витрины с понятной структурой, карточками товаров и спокойным путём к покупке.</p>
+                <span class="journal-rubric__more">Подробнее</span>
+              </div>
+            </a>
+          </article>
+          <article class="journal-rubric">
+            <a class="journal-rubric__link" href="services/android/index.html">
+              <figure class="journal-rubric__thumb"><img src="assets/services/android.png" alt="" loading="lazy" decoding="async"></figure>
+              <div class="journal-rubric__body">
+                <h3>Android-приложения</h3>
+                <p>Простые приложения под задачи бизнеса, продукта или внутреннего процесса.</p>
+                <span class="journal-rubric__more">Подробнее</span>
+              </div>
+            </a>
+          </article>
+          <article class="journal-rubric">
+            <a class="journal-rubric__link" href="services/ai-assistants/index.html">
+              <figure class="journal-rubric__thumb"><img src="assets/services/ai-assistants.png" alt="" loading="lazy" decoding="async"></figure>
+              <div class="journal-rubric__body">
+                <h3>ИИ-помощники</h3>
+                <p>Инструменты для обращений, ответов, текстов и повторяющихся рабочих задач.</p>
+                <span class="journal-rubric__more">Подробнее</span>
+              </div>
+            </a>
+          </article>
+          <article class="journal-rubric">
+            <a class="journal-rubric__link" href="services/copywriting/index.html">
+              <figure class="journal-rubric__thumb"><img src="assets/services/copywriting.png" alt="" loading="lazy" decoding="async"></figure>
+              <div class="journal-rubric__body">
+                <h3>Продающие тексты</h3>
+                <p>Тексты для сайтов и лендингов, которые объясняют ценность и помогают принять решение.</p>
+                <span class="journal-rubric__more">Подробнее</span>
+              </div>
+            </a>
+          </article>
+          <article class="journal-rubric">
+            <a class="journal-rubric__link" href="services/web-design/index.html">
+              <figure class="journal-rubric__thumb"><img src="assets/services/web-design.png" alt="" loading="lazy" decoding="async"></figure>
+              <div class="journal-rubric__body">
+                <h3>Web-дизайн</h3>
+                <p>Внешний вид, который поддерживает смысл и ведёт человека по странице.</p>
+                <span class="journal-rubric__more">Подробнее</span>
+              </div>
+            </a>
+          </article>
+          <article class="journal-rubric">
+            <a class="journal-rubric__link" href="services/prototypes/index.html">
+              <figure class="journal-rubric__thumb"><img src="assets/services/prototypes.png" alt="" loading="lazy" decoding="async"></figure>
+              <div class="journal-rubric__body">
+                <h3>Прототипы и MVP</h3>
+                <p>Первую версию идеи, которую можно показать, протестировать и развивать.</p>
+                <span class="journal-rubric__more">Подробнее</span>
+              </div>
+            </a>
+          </article>
         </div>
         <div class="center-action">
-          <a class="btn btn-invert" href="services.html">Смотреть услуги</a>
+          <a class="btn btn-invert" href="services.html">Полный каталог услуг</a>
         </div>
       </div>
     </section>
 
-    <section class="section section-muted" id="audience">
+    <section class="journal-notes section section-muted" id="audience">
       <div class="container">
-        <div class="section-heading section-heading--wide">
-        <h2>Для кого это подходит?</h2>
-        </div>
-        <div class="grid cards-5">
-          <article class="service-card">
+        <header class="journal-section-head">
+          <h2>Кому это подойдёт</h2>
+        </header>
+        <div class="journal-notes__grid">
+          <article class="journal-note">
             <span class="icon-box"><svg class="icon"><use href="#icon-user"></use></svg></span>
             <h3>Специалистам и экспертам</h3>
             <p>Упаковываю опыт, услуги и сильные стороны в понятный сайт или лендинг.</p>
           </article>
-          <article class="service-card">
+          <article class="journal-note">
             <span class="icon-box"><svg class="icon"><use href="#icon-briefcase"></use></svg></span>
             <h3>Предпринимателям и бизнесу</h3>
-            <p>Создаю решения для заявок, продаж, коммуникации с клиентами и автоматизации рабочих процессов.</p>
+            <p>Создаю решения для заявок, продаж, коммуникации с клиентами и автоматизации процессов.</p>
           </article>
-          <article class="service-card">
+          <article class="journal-note">
             <span class="icon-box"><svg class="icon"><use href="#icon-hand"></use></svg></span>
             <h3>Ремесленникам и мастерам</h3>
             <p>Показываю качество ручной работы, процесс, характер мастера и готовый результат.</p>
@@ -184,81 +243,115 @@
       </div>
     </section>
 
-    <section class="section section-muted" id="why-me">
-      <div class="container">
-        <div class="section-heading">
-        <h2>Почему со мной работают</h2>
+    <section class="journal-feature section" id="why-me">
+      <div class="container journal-feature__grid">
+        <div class="journal-feature__copy">
+          <h2>Почему со мной работают</h2>
+          <div class="journal-prose">
+            <p>Я начинаю с задачи, а не с шаблона. Сначала разбираю, что нужно показать, кому это адресовано и к какому действию нужно привести человека.</p>
+            <p>После этого выстраиваю структуру, тексты, дизайн и рабочую механику. Так проект становится понятнее, сильнее и ближе к клиенту.</p>
+          </div>
+          <ul class="journal-checklist">
+            <li>начинаю с задачи, а не с шаблона</li>
+            <li>смотрю на аудиторию и нужное действие</li>
+            <li>соединяю структуру, тексты, дизайн и механику</li>
+            <li>делаю проект понятнее и ближе к клиенту</li>
+          </ul>
         </div>
-        <div class="text-block">
-          <p>Я начинаю с задачи, а не с шаблона. Сначала разбираю, что нужно показать, кому это адресовано и к какому действию нужно привести человека.</p>
-          <p>После этого выстраиваю структуру, тексты, дизайн и рабочую механику. Так проект становится понятнее, сильнее и ближе к клиенту.</p>
-        </div>
-        <ul class="benefits-list benefit-cards">
-          <li><svg class="icon"><use href="#icon-check"></use></svg>начинаю с задачи, а не с шаблона;</li>
-          <li><svg class="icon"><use href="#icon-check"></use></svg>смотрю на аудиторию и нужное действие;</li>
-          <li><svg class="icon"><use href="#icon-check"></use></svg>соединяю структуру, тексты, дизайн и механику;</li>
-          <li><svg class="icon"><use href="#icon-check"></use></svg>делаю проект понятнее и ближе к клиенту.</li>
-        </ul>
-        <div class="center-action">
-          <a class="btn btn-invert" href="contacts.html">Хочу такой подход</a>
-        </div>
+        <figure class="journal-media journal-media--square">
+          <img src="assets/services/ai-assistants.png" alt="Иллюстрация: ИИ-помощники для рабочих задач" loading="lazy" decoding="async">
+          <figcaption>ИИ-помощники снимают рутину и ускоряют повседневную работу.</figcaption>
+        </figure>
       </div>
     </section>
 
-    <section class="section" id="process">
+    <section class="journal-process section" id="process">
       <div class="container">
-        <div class="section-heading">
-        <h2>Как я работаю?</h2>
-        </div>
-        <ol class="steps">
-          <li><span><svg class="icon"><use href="#icon-target"></use></svg></span> <div><strong>Разбираю задачу</strong><p>Понимаю цель проекта, аудиторию и нужный результат.</p></div></li>
-          <li><span><svg class="icon"><use href="#icon-layout"></use></svg></span> <div><strong>Собираю структуру</strong><p>Продумываю блоки, логику страницы и путь клиента.</p></div></li>
-          <li><span><svg class="icon"><use href="#icon-pen"></use></svg></span> <div><strong>Упаковываю смысл</strong><p>Пишу понятные тексты и собираю визуальную подачу.</p></div></li>
-          <li><span><svg class="icon"><use href="#icon-layers"></use></svg></span> <div><strong>Создаю решение</strong><p>Собираю сайт, лендинг, приложение, прототип или ИИ-помощника.</p></div></li>
-          <li><span><svg class="icon"><use href="#icon-check"></use></svg></span> <div><strong>Довожу до запуска</strong><p>Проверяю логику, вношу правки и готовлю проект к использованию.</p></div></li>
+        <header class="journal-section-head">
+          <h2>Как проходит работа</h2>
+        </header>
+        <ol class="journal-steps">
+          <li>
+            <span class="journal-steps__num">1</span>
+            <div>
+              <strong>Разбираю задачу</strong>
+              <p>Понимаю цель проекта, аудиторию и нужный результат.</p>
+            </div>
+          </li>
+          <li>
+            <span class="journal-steps__num">2</span>
+            <div>
+              <strong>Собираю структуру</strong>
+              <p>Продумываю блоки, логику страницы и путь клиента.</p>
+            </div>
+          </li>
+          <li>
+            <span class="journal-steps__num">3</span>
+            <div>
+              <strong>Упаковываю смысл</strong>
+              <p>Пишу понятные тексты и собираю визуальную подачу.</p>
+            </div>
+          </li>
+          <li>
+            <span class="journal-steps__num">4</span>
+            <div>
+              <strong>Создаю решение</strong>
+              <p>Собираю сайт, лендинг, приложение, прототип или ИИ-помощника.</p>
+            </div>
+          </li>
+          <li>
+            <span class="journal-steps__num">5</span>
+            <div>
+              <strong>Довожу до запуска</strong>
+              <p>Проверяю логику, вношу правки и готовлю проект к использованию.</p>
+            </div>
+          </li>
         </ol>
-        <div class="text-block process-result">
-          <p>В результате получается понятное рабочее решение, которое можно использовать, показывать клиентам и развивать дальше.</p>
-        </div>
+        <p class="journal-process__result">В результате получается понятное рабочее решение, которое можно использовать, показывать клиентам и развивать дальше.</p>
         <div class="center-action">
-          <a class="btn btn-invert" href="process.html">Подробнее о процессе</a>
+          <a class="btn btn-secondary" href="process.html">Подробнее о процессе</a>
         </div>
       </div>
     </section>
 
-    <section class="section final-cta" id="contact">
-      <div class="container">
-        <h2>Посмотрите мои проекты</h2>
-        <p>
-          На сайте можно посмотреть портфолио, узнать больше обо мне, познакомиться с проектами и поиграть в небольшую игру, которую я написал.
-        </p>
-        <p>Если вам нужен сайт, лендинг, интернет-магазин, Android-приложение, ИИ-помощник или понятная подача идеи в интернете, напишите мне.</p>
-        <p>Обсудим задачу и найдём решение для вашего проекта.</p>
-        <div class="cta-row centered">
-          <a class="btn btn-invert" href="contacts.html">Создать проект</a>
+    <section class="journal-closing section final-cta" id="contact">
+      <div class="container journal-closing__grid">
+        <div class="journal-closing__copy">
+          <h2>Обсудим ваш проект?</h2>
+          <div class="journal-prose">
+            <p>На сайте можно посмотреть портфолио, познакомиться с проектами и поиграть в небольшую игру, которую я написал.</p>
+            <p>Если вам нужен сайт, лендинг, магазин, приложение, ИИ-помощник или понятная подача идеи — напишите. Разберём задачу и найдём решение.</p>
+          </div>
+          <div class="cta-row">
+            <a class="btn btn-invert" href="contacts.html">Создать проект</a>
+            <a class="btn btn-secondary" href="works.html">Портфолио</a>
+          </div>
+          <div class="contact-lines contact-lines--icons-only" aria-label="Контакты и мессенджеры">
+            <a class="social-link social-link--icon-only" href="mailto:rednine@ya.ru" aria-label="Написать на почту rednine@ya.ru">
+              <span class="contact-icon contact-icon--logo" aria-hidden="true">
+                <img src="assets/contact-email.png" alt="" width="36" height="36" decoding="async">
+              </span>
+            </a>
+            <a class="social-link social-link--icon-only" href="https://vk.com/voroshilovevgeny" target="_blank" rel="noopener noreferrer" aria-label="ВКонтакте">
+              <span class="contact-icon contact-icon--logo" aria-hidden="true">
+                <img src="assets/contact-vk.png" alt="" width="36" height="36" decoding="async">
+              </span>
+            </a>
+            <a class="social-link social-link--icon-only" href="https://max.ru/u/f9LHodD0cOLtBTAtkMWYJZFcamuwqAwYcvVHDooAM1fEtYRtKJqG86VoRUI" target="_blank" rel="noopener noreferrer" aria-label="MAX">
+              <span class="contact-icon contact-icon--logo" aria-hidden="true">
+                <img src="assets/contact-max.png" alt="" width="36" height="36" decoding="async">
+              </span>
+            </a>
+            <a class="social-link social-link--icon-only" href="https://t.me/evgenivoroshilov" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+              <span class="contact-icon contact-icon--logo" aria-hidden="true">
+                <img src="assets/contact-telegram.png" alt="" width="36" height="36" decoding="async">
+              </span>
+            </a>
+          </div>
         </div>
-        <div class="contact-lines contact-lines--icons-only" aria-label="Контакты и мессенджеры">
-          <a class="social-link social-link--icon-only" href="mailto:rednine@ya.ru" aria-label="Написать на почту rednine@ya.ru">
-            <span class="contact-icon contact-icon--logo" aria-hidden="true">
-              <img src="assets/contact-email.png" alt="" width="36" height="36" decoding="async">
-            </span>
-          </a>
-          <a class="social-link social-link--icon-only" href="https://vk.com/voroshilovevgeny" target="_blank" rel="noopener noreferrer" aria-label="ВКонтакте">
-            <span class="contact-icon contact-icon--logo" aria-hidden="true">
-              <img src="assets/contact-vk.png" alt="" width="36" height="36" decoding="async">
-            </span>
-          </a>
-          <a class="social-link social-link--icon-only" href="https://max.ru/u/f9LHodD0cOLtBTAtkMWYJZFcamuwqAwYcvVHDooAM1fEtYRtKJqG86VoRUI" target="_blank" rel="noopener noreferrer" aria-label="MAX">
-            <span class="contact-icon contact-icon--logo" aria-hidden="true">
-              <img src="assets/contact-max.png" alt="" width="36" height="36" decoding="async">
-            </span>
-          </a>
-          <a class="social-link social-link--icon-only" href="https://t.me/evgenivoroshilov" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
-            <span class="contact-icon contact-icon--logo" aria-hidden="true">
-              <img src="assets/contact-telegram.png" alt="" width="36" height="36" decoding="async">
-            </span>
-          </a>
-        </div>
+        <figure class="journal-media journal-media--closing">
+          <img src="assets/services/sites.png" alt="Иллюстрация: сайты и лендинги" loading="lazy" decoding="async">
+        </figure>
       </div>
     </section>
   </main>
@@ -266,6 +359,7 @@
   <footer class="site-footer" id="site-footer"></footer>
 
   <script src="footer.js"></script>
+  <script src="icon-sprite.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
